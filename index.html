@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𐊎ꝛꛚ</title>
+    <title>Testimonial — Mr. Lang</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Warm up connection to portfolio while video plays -->
@@ -12,16 +12,7 @@
     <link rel="prefetch" href="https://main.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html {
             width: 100%; height: 100%;
             background: #003300;
@@ -47,39 +38,17 @@
             align-items: center; justify-content: center;
             cursor: pointer;
             transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            backdrop-filter: blur(0px);
+            user-select: none;
         }
+        #splash.fading { opacity: 0; pointer-events: none; }
 
-        #splash.fading {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        /* TEXT LOGO: 𐊎ꝛꛚ with yellow pulsing glow (non-bold) */
-.s-logo-img {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2.2rem, 8vw, 4.5rem);
-    font-weight: 400;      /* ← Changed from 700 to 400 (non-bold) */
-    font-style: normal;
-    color: #FEF612;
-    text-align: center;
-    letter-spacing: -0.05em;
-    filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
-    animation: pulseGlow 2.5s ease-in-out infinite both;
-    line-height: 1;
-}
-
-        /* ----- PULSE GLOW ANIMATION (the "MRL above" effect) ----- */
-        @keyframes pulseGlow {
-            0%, 100% {
-                filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
-                text-shadow: 0 0 4px #FEF612;
-            }
-            50% {
-                filter: drop-shadow(0 0 20px #FEF612) brightness(1.35);
-                text-shadow: 0 0 12px #FEF612;
-            }
+        .s-logo-img {
+            max-width: clamp(160px, 30vw, 340px);
+            max-height: clamp(100px, 20vh, 220px);
+            object-fit: contain;
+            margin-bottom: clamp(1.2rem, 3vh, 2.5rem);
         }
 
         .s-welcome {
@@ -100,58 +69,29 @@
             margin-bottom: clamp(2rem, 7vh, 5rem);
         }
 
-        /* ========== ✦ ENHANCED TAP SECTION: doorway + "TAP TO ENTER" ✦ ========== */
-        /* container that groups the door symbol and text — both get the same pulsing glow as MRL */
-        .enter-glow-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            /* inherit the pulseGlow animation to make both elements glow together */
-            animation: pulseGlow 2.5s ease-in-out infinite both;
-            filter: drop-shadow(0 0 6px #FEF612);
-            transition: filter 0.2s ease;
-        }
-
-        /* doorway icon wrapper — bright yellow, animated glow via parent */
         .s-ring {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: #FEF612;
-            transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            width: clamp(54px, 7.5vw, 68px);
+            height: clamp(54px, 7.5vw, 68px);
+            border: 1.5px solid rgba(255,255,255,0.13);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.1rem;
+            transition: border-color 0.7s, box-shadow 0.7s;
+            animation: s-breathe 4s ease-in-out infinite;
+        }
+        .s-ring svg { color: rgba(255,255,255,0.32); transition: color 0.6s; }
+        #splash:hover .s-ring { border-color: rgba(255,255,0,0.45); box-shadow: 0 0 60px rgba(255,255,0,0.06); }
+        #splash:hover .s-ring svg { color: rgba(255,255,0,0.8); }
+
+        @keyframes s-breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50%       { transform: scale(1.045); opacity: 1; }
         }
 
-        .s-ring svg {
-            width: 32px;
-            height: 32px;
-            stroke: #FEF612;
-            stroke-width: 1.6;
-            filter: drop-shadow(0 0 4px #FEF612);
-            transition: all 0.2s;
-        }
-
-        /* "TAP TO ENTER" text — matches glow and color from MRL logo */
         .s-cta {
-            font-size: clamp(0.65rem, 0.9vw, 0.85rem);
-            font-weight: 700;
-            letter-spacing: 0.45em;
-            text-transform: uppercase;
-            color: #FEF612;
-            background: transparent;
-            text-shadow: 0 0 4px #FEF612;
-            transition: letter-spacing 0.3s ease;
-        }
-
-        /* subtle hover / tap lift effect — keeps glowing but adds slight scale */
-        #splash:hover .enter-glow-group {
-            transform: scale(1.02);
-            filter: drop-shadow(0 0 12px #FEF612) brightness(1.2);
-        }
-
-        #splash:active .enter-glow-group {
-            transform: scale(0.98);
+            font-size: clamp(0.5rem, 0.7vw, 0.58rem);
+            font-weight: 600; letter-spacing: 0.4em;
+            text-transform: uppercase; color: rgba(255,255,255,0.16);
         }
 
         .s-in {
@@ -212,146 +152,41 @@
         }
         .quote-item blockquote {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
-            font-weight: 600;
-            line-height: 1.4;
-            color: #fff;
-            margin-bottom: 0.5rem;
+            font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+            font-weight: 600; line-height: 1.4;
+            color: #fff; margin-bottom: 0.8rem;
         }
-
-        .hl {
-            background: #ffff00;
-            color: #003300;
-            padding: 0.02em 0.2em;
-            font-weight: 700;
-        }
-
+        .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
         .quote-item cite {
-            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
-            font-weight: 300;
-            font-style: normal;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.42);
+            font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+            font-weight: 300; font-style: normal;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: rgba(255,255,255,0.42);
         }
 
-        /* quote positions */
-        .pos-1 {
-            top: 12%;
-            left: 6%;
-            width: 26%;
-            transform: translateY(-20px);
-            text-align: left;
-        }
 
-        .pos-2 {
-            top: 10%;
-            right: 6%;
-            width: 26%;
-            transform: translateY(-20px);
-            text-align: right;
-        }
+        .quote-top { top: 10%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 85%; max-width: 800px; }
+        .quote-bottom { bottom: 10%; left: 50%; transform: translate(-50%, 40px); text-align: center; width: 85%; max-width: 800px; }
+        .quote-left { top: 50%; left: 5%; transform: translate(-40px, -50%); text-align: left; width: 40%; max-width: 450px; }
+        .quote-right { top: 50%; right: 5%; transform: translate(40px, -50%); text-align: right; width: 40%; max-width: 450px; }
 
-        .pos-3 {
-            top: 42%;
-            left: 4%;
-            width: 26%;
-            transform: translateX(-20px);
-            text-align: left;
-        }
 
-        .pos-4 {
-            top: 45%;
-            left: 50%;
-            width: 34%;
-            transform: translate(-50%, -20px);
-            text-align: center;
-        }
+        .quote-top.active { transform: translate(-50%, 0); opacity: 1; }
+        .quote-bottom.active { transform: translate(-50%, 0); opacity: 1; }
+        .quote-left.active { transform: translate(0, -50%); opacity: 1; }
+        .quote-right.active { transform: translate(0, -50%); opacity: 1; }
 
-        .pos-4 blockquote {
-            font-size: clamp(0.9rem, 1.6vw, 1.4rem);
-            margin-bottom: 0.8rem;
-        }
-
-        .pos-5 {
-            top: 42%;
-            right: 4%;
-            width: 26%;
-            transform: translateX(20px);
-            text-align: right;
-        }
-
-        .pos-6 {
-            bottom: 12%;
-            left: 10%;
-            width: 26%;
-            transform: translateY(20px);
-            text-align: left;
-        }
-
-        .pos-7 {
-            bottom: 10%;
-            right: 10%;
-            width: 26%;
-            transform: translateY(20px);
-            text-align: right;
-        }
-
-        .pos-1.active,
-        .pos-2.active,
-        .pos-6.active,
-        .pos-7.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .pos-3.active,
-        .pos-5.active {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .pos-4.active {
-            transform: translate(-50%, 0);
-            opacity: 1;
-        }
 
         @media (max-width: 768px) {
-            #quote-layer {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-            }
-            .quote-item {
-                position: relative;
-                top: auto !important;
-                left: auto !important;
-                right: auto !important;
-                bottom: auto !important;
-                transform: translateY(15px) !important;
-                width: 100% !important;
-                text-align: center !important;
-                margin-bottom: 0.8rem;
-            }
-            .quote-item.active {
-                transform: translateY(0) !important;
-                opacity: 1;
-            }
-
-            .quote-item blockquote {
-                font-size: clamp(0.7rem, 3vw, 1rem);
-                margin-bottom: 0.2rem;
-            }
-
-            .pos-4 blockquote {
-                font-size: clamp(0.8rem, 3.5vw, 1.1rem);
-            }
-
-            .quote-item cite {
-                font-size: 0.5rem;
-            }
+            .quote-top { top: 5%; }
+            .quote-bottom { bottom: 5%; }
+            .quote-left { top: 35%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 90%; max-width: none; }
+            .quote-right { top: 65%; left: 50%; right: auto; transform: translate(-50%, 40px); text-align: center; width: 90%; max-width: none; }
+           
+            .quote-left.active { transform: translate(-50%, 0); }
+            .quote-right.active { transform: translate(-50%, 0); }
+           
+            .quote-item blockquote { font-size: clamp(0.85rem, 3.5vw, 1.2rem); }
         }
 
 
@@ -360,26 +195,23 @@
 <body>
 <div id="stage">
 
-    <!-- SPLASH with glowing DOOR + "TAP TO ENTER" that now shares the SAME pulseGlow animation as MRL above -->
+    <!-- Splash: MR. L. -->
     <div id="splash">
-        <div class="s-in s-logo-img">𐊎ꝛꛚ</div>
-        <div class="s-in s-welcome">welcome, come in and find your seat, you can<br> leave your phones and backpacks against the wall</div>
+        <img class="s-in s-logo-img" src="https://i.imgur.com/nbJAxvM.png" alt="Mr. Lang" onerror="this.src='https://i.imgur.com/nbJAxvM.jpg'">
+        <div class="s-in s-welcome">welcome, come on in and find your seat, and leave your phones and backpacks on the wall</div>
         <div class="s-in s-divider"></div>
-
-        <!-- GROUP containing doorway icon + TAP TO ENTER text — BOTH glow like the "MRL above" -->
-        <div class="enter-glow-group s-in">
-            <div class="s-ring">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15" />
-                    <line x1="1" y1="21" x2="23" y2="21" />
-                    <path d="M10 21v-5a2 2 0 0 1 4 0v5" />
-                </svg>
-            </div>
-            <div class="s-cta">Tap to enter</div>
+        <div class="s-in s-ring">
+            <!-- threshold / enter symbol: a doorway arch -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15"/>
+                <line x1="1" y1="21" x2="23" y2="21"/>
+                <path d="M10 21v-5a2 2 0 0 1 4 0v5"/>
+            </svg>
         </div>
+        <div class="s-in s-cta">Tap to enter</div>
     </div>
 
-    <!-- Video layer (YouTube iframe) -->
+    <!-- Video -->
     <div id="video-layer"></div>
 
     <!-- Speaker lower-third -->
@@ -393,33 +225,21 @@
     <!-- Closing quotes -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
-        <div class="quote-item pos-1">
-            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
+        <div class="quote-item quote-top">
+            <blockquote>"I cannot speak highly enough of Michael Lang. He is a natural teacher... <span class="hl">Frankly, he has it all!</span>"</blockquote>
             <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
-        <div class="quote-item pos-2">
-            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
+        <div class="quote-item quote-left">
+            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> It's truly been a pleasure getting to work with Michael. He is exactly what our students need."</blockquote>
             <cite>Christopher Burt &middot; Clinical Supervisor</cite>
         </div>
-        <div class="quote-item pos-3">
+        <div class="quote-item quote-right">
             <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
             <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
-        <div class="quote-item pos-4">
-            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
+        <div class="quote-item quote-bottom">
+            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span> level questions... is <span class="hl">just off the chart.</span>"</blockquote>
             <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-5">
-            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-6">
-            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-7">
-            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
     </div>
 
