@@ -44,19 +44,34 @@
         }
         #splash.fading { opacity: 0; pointer-events: none; }
 
-        /* TEXT LOGO: 𐊎ꝛꛚ with yellow pulsing glow */
-        .s-logo-img {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2.2rem, 8vw, 4.5rem);
-            font-weight: 700;
-            font-style: normal;
-            color: #FEF612;
-            text-align: center;
-            letter-spacing: -0.05em;
-            filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
-            animation: pulseGlow 2.5s ease-in-out infinite both;
-            line-height: 1;
-        }
+        /* TEXT LOGO: 𐊎ꝛꛚ with yellow pulsing glow (non-bold) */
+.s-logo-img {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+    font-weight: 400;      /* ← Changed from 700 to 400 (non-bold) */
+    font-style: normal;
+    color: #FEF612;
+    text-align: center;
+    letter-spacing: -0.05em;
+    filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
+    animation: pulseGlow 2.5s ease-in-out infinite both;
+    line-height: 1;
+}
+
+/* TAP TO ENTER glow */
+.s-cta {
+    font-size: clamp(0.5rem, 0.7vw, 0.58rem);
+    font-weight: 600; 
+    letter-spacing: 0.4em;
+    text-transform: uppercase; 
+    color: #FEF612;                          /* ← Bright yellow */
+    filter: drop-shadow(0 0 4px #FEF612);    /* ← Subtle glow */
+    transition: filter 0.6s;
+}
+
+#splash:hover .s-cta {
+    filter: drop-shadow(0 0 8px #FEF612) brightness(1.2);
+}
 
         /* soft yellow pulse animation */
         @keyframes pulseGlow {
