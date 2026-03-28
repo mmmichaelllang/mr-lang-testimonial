@@ -225,16 +225,17 @@
             transform: translateY(0);
         }
 
-        /* The actual scrolling rows */
         .marquee-row {
             display: flex;
             width: max-content;
+            will-change: transform;
         }
 
         .marquee-content {
             display: flex;
             gap: 4vw;
-            padding-right: 4vw; /* Must match gap for seamless loop */
+            padding-right: 4vw; 
+            flex-shrink: 0; /* CRITICAL FIX: Prevents browser from crushing the text */
         }
 
         .quote-item {
@@ -242,7 +243,8 @@
             flex-direction: column;
             justify-content: center;
             gap: 0.5rem;
-            pointer-events: auto; /* Allows hover effects on the highlights */
+            pointer-events: auto; 
+            flex-shrink: 0; /* CRITICAL FIX */
         }
 
         .quote-item blockquote {
@@ -304,16 +306,20 @@
             white-space: nowrap;
         }
 
-        /* Marquee Animations - Slowed down for readability */
-        .move-right { animation: moveRight 90s linear infinite; }
-        .move-right-fast { animation: moveRight 80s linear infinite; }
-        .move-left { animation: moveLeft 100s linear infinite; }
+        /* 
+           CRITICAL FIX: Animations ONLY start when the wrapper gets the .active class. 
+           This ensures they start at exactly 0% position when they fade in, 
+           guaranteeing your favorites are seen immediately.
+        */
+        .marquee-wrapper.active .move-right { animation: scrollRight 90s linear infinite; }
+        .marquee-wrapper.active .move-left { animation: scrollLeft 100s linear infinite; }
+        .marquee-wrapper.active .move-right-fast { animation: scrollRight 80s linear infinite; }
 
-        @keyframes moveLeft {
+        @keyframes scrollLeft {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        @keyframes moveRight {
+        @keyframes scrollRight {
             0% { transform: translateX(-50%); }
             100% { transform: translateX(0); }
         }
@@ -534,7 +540,7 @@ function drawQuote(p) {
     quoteBg.style.opacity = e.toFixed(3);
    
     const wrappers = document.querySelectorAll('.marquee-wrapper');
-    // Stagger the fade-in of the three rows
+    // The .active class now triggers BOTH the fade-in AND the start of the scrolling animation
     if (p > 0.1) wrappers[0].classList.add('active');
     if (p > 0.3) wrappers[1].classList.add('active');
     if (p > 0.5) wrappers[2].classList.add('active');
