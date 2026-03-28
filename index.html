@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𐊎ꝛꛚ</title>
+    <title>Testimonial — Mr. Lang</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Warm up connection to portfolio while video plays -->
     <link rel="preconnect" href="https://main.mrla.ng">
     <link rel="dns-prefetch" href="https://main.mrla.ng">
+    <link rel="prefetch" href="https://main.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html {
             width: 100%; height: 100%;
-            background: transparent;
+            background: #003300;
         }
         body {
             width: 100%; height: 100%;
@@ -23,7 +24,7 @@
             font-family: 'Inter', system-ui, sans-serif;
             transition: background 2s ease;
         }
-        body.dissolved { background: transparent; }
+        body.dissolved { background: #003300; }
         body.dissolved #stage { opacity: 0; pointer-events: none; }
 
         /* ── Wrapper ── */
@@ -136,31 +137,58 @@
             text-transform: uppercase; color: rgba(255,255,255,0.35);
         }
 
-        /* ── Closing quote ── */
+
+        /* ── Closing quotes ── */
         #quote-layer {
             position: absolute; inset: 0; z-index: 20;
-            display: flex; align-items: center; justify-content: center;
             pointer-events: none;
         }
         #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; }
-        #quote-content {
-            position: relative; max-width: 860px;
-            padding: 2rem 2.5rem; text-align: center;
-            opacity: 0; transform: translateX(-80px);
+       
+        .quote-item {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s ease, transform 1.5s ease;
         }
-        #quote-content blockquote {
+        .quote-item blockquote {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1rem, 2.8vw, 2.4rem);
-            font-weight: 600; line-height: 1.42;
-            color: #fff; margin-bottom: 1.5rem;
+            font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+            font-weight: 600; line-height: 1.4;
+            color: #fff; margin-bottom: 0.8rem;
         }
         .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
-        #quote-content cite {
-            font-size: clamp(0.6rem, 1vw, 0.82rem);
+        .quote-item cite {
+            font-size: clamp(0.55rem, 0.9vw, 0.75rem);
             font-weight: 300; font-style: normal;
             letter-spacing: 0.16em; text-transform: uppercase;
             color: rgba(255,255,255,0.42);
         }
+
+
+        .quote-top { top: 10%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 85%; max-width: 800px; }
+        .quote-bottom { bottom: 10%; left: 50%; transform: translate(-50%, 40px); text-align: center; width: 85%; max-width: 800px; }
+        .quote-left { top: 50%; left: 5%; transform: translate(-40px, -50%); text-align: left; width: 40%; max-width: 450px; }
+        .quote-right { top: 50%; right: 5%; transform: translate(40px, -50%); text-align: right; width: 40%; max-width: 450px; }
+
+
+        .quote-top.active { transform: translate(-50%, 0); opacity: 1; }
+        .quote-bottom.active { transform: translate(-50%, 0); opacity: 1; }
+        .quote-left.active { transform: translate(0, -50%); opacity: 1; }
+        .quote-right.active { transform: translate(0, -50%); opacity: 1; }
+
+
+        @media (max-width: 768px) {
+            .quote-top { top: 5%; }
+            .quote-bottom { bottom: 5%; }
+            .quote-left { top: 35%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 90%; max-width: none; }
+            .quote-right { top: 65%; left: 50%; right: auto; transform: translate(-50%, 40px); text-align: center; width: 90%; max-width: none; }
+           
+            .quote-left.active { transform: translate(-50%, 0); }
+            .quote-right.active { transform: translate(-50%, 0); }
+           
+            .quote-item blockquote { font-size: clamp(0.85rem, 3.5vw, 1.2rem); }
+        }
+
 
     </style>
 </head>
@@ -193,11 +221,24 @@
         <div class="lt-role">Clinical Supervisor</div>
     </div>
 
-    <!-- Closing quote -->
+
+    <!-- Closing quotes -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
-        <div id="quote-content">
-            <blockquote>"I'm feeling really confident about this... I just wanted to say, <span class="hl">again: your ability to</span> <span class="hl">facilitate critical thinking</span> level questions in engaging those students <span class="hl">is just off the chart.</span>"</blockquote>
+        <div class="quote-item quote-top">
+            <blockquote>"I cannot speak highly enough of Michael Lang. He is a natural teacher... <span class="hl">Frankly, he has it all!</span>"</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item quote-left">
+            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> It's truly been a pleasure getting to work with Michael. He is exactly what our students need."</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item quote-right">
+            <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item quote-bottom">
+            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span> level questions... is <span class="hl">just off the chart.</span>"</blockquote>
             <cite>Christopher Burt &middot; Clinical Supervisor</cite>
         </div>
     </div>
@@ -313,9 +354,13 @@ function stopPolling() { if (poller) { clearInterval(poller); poller = null; } }
 
 function drawQuote(p) {
     var e = 1 - Math.pow(1 - p, 3);
-    quoteBg.style.opacity        = e.toFixed(3);
-    quoteContent.style.opacity   = e.toFixed(3);
-    quoteContent.style.transform = 'translateX(' + (-80 * (1 - e)).toFixed(1) + 'px)';
+    quoteBg.style.opacity = e.toFixed(3);
+   
+    const quotes = document.querySelectorAll('.quote-item');
+    if (p > 0.1) quotes[0].classList.add('active');
+    if (p > 0.3) quotes[1].classList.add('active');
+    if (p > 0.5) quotes[2].classList.add('active');
+    if (p > 0.7) quotes[3].classList.add('active');
 }
 
 function finalise() {
@@ -323,13 +368,14 @@ function finalise() {
     drawQuote(1);
     setTimeout(function() { videoLayer.style.display = 'none'; }, 600);
 
-    /* Hold the quote briefly, then dissolve and redirect to portfolio */
+
+    /* Hold the quotes briefly, then dissolve and redirect to portfolio */
     setTimeout(function() {
         document.body.classList.add('dissolved');
-    }, 1500);
+    }, 8000);
     setTimeout(function() {
         window.location.replace('https://main.mrla.ng');
-    }, 3500);
+    }, 10000);
 }
 </script>
 
