@@ -136,19 +136,19 @@
         /* "TAP TO ENTER" text — matches glow and color from MRL logo */
         .s-cta {
             font-size: clamp(0.65rem, 0.9vw, 0.85rem);
-            font-weight: 700;
+            font-weight: 400 !important;
             letter-spacing: 0.45em;
             text-transform: uppercase;
             color: #FEF612;
             background: transparent;
-            text-shadow: 0 0 4px #FEF612;
+            text-shadow: 0 0 2px #FEF612;
             transition: letter-spacing 0.3s ease;
         }
 
         /* subtle hover / tap lift effect — keeps glowing but adds slight scale */
         #splash:hover .enter-glow-group {
-            transform: scale(1.02);
-            filter: drop-shadow(0 0 12px #FEF612) brightness(1.2);
+            transform: scale(1.01);
+            filter: drop-shadow(0 0 12px #FEF612) brightness(1.0);
         }
 
         #splash:active .enter-glow-group {
