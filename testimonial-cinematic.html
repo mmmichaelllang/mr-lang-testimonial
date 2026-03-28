@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial — Mr. Lang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%; height: 100%;
+            overflow: hidden;
+            background: #003300;
+            font-family: 'Inter', system-ui, sans-serif;
+            transition: background 2s ease;
+        }
+        body.dissolved { background: transparent; }
+        body.dissolved #stage { opacity: 0; pointer-events: none; }
+
+        /* ── Wrapper ── */
+        #stage { position: absolute; inset: 0; transition: opacity 2s ease; }
+
+        /* ── Splash: MR. L. ── */
+        #splash {
+            position: absolute; inset: 0; z-index: 50;
+            background: #003300;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+        }
+        #splash.fading { opacity: 0; pointer-events: none; }
+
+        .s-logo-img {
+            max-width: clamp(160px, 30vw, 340px);
+            max-height: clamp(100px, 20vh, 220px);
+            object-fit: contain;
+            margin-bottom: clamp(1.2rem, 3vh, 2.5rem);
+        }
+
+        .s-welcome {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(0.8rem, 2vw, 1.25rem);
+            font-weight: 400; font-style: italic;
+            color: rgba(255,255,255,0.28);
+            letter-spacing: 0.04em;
+            text-align: center;
+            max-width: 520px;
+            line-height: 1.6;
+            margin-bottom: clamp(2rem, 7vh, 5rem);
+        }
+
+        .s-divider {
+            width: 44px; height: 1px;
+            background: rgba(255,255,255,0.09);
+            margin-bottom: clamp(2rem, 7vh, 5rem);
+        }
+
+        .s-ring {
+            width: clamp(54px, 7.5vw, 68px);
+            height: clamp(54px, 7.5vw, 68px);
+            border: 1.5px solid rgba(255,255,255,0.13);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.1rem;
+            transition: border-color 0.7s, box-shadow 0.7s;
+            animation: s-breathe 4s ease-in-out infinite;
+        }
+        .s-ring svg { color: rgba(255,255,255,0.32); transition: color 0.6s; }
+        #splash:hover .s-ring { border-color: rgba(255,255,0,0.45); box-shadow: 0 0 60px rgba(255,255,0,0.06); }
+        #splash:hover .s-ring svg { color: rgba(255,255,0,0.8); }
+
+        @keyframes s-breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50%       { transform: scale(1.045); opacity: 1; }
+        }
+
+        .s-cta {
+            font-size: clamp(0.5rem, 0.7vw, 0.58rem);
+            font-weight: 600; letter-spacing: 0.4em;
+            text-transform: uppercase; color: rgba(255,255,255,0.16);
+        }
+
+        .s-in {
+            opacity: 0; transform: translateY(16px);
+            animation: fadeup 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .s-in:nth-child(1) { animation-delay: 0.2s; }
+        .s-in:nth-child(2) { animation-delay: 0.5s; }
+        .s-in:nth-child(3) { animation-delay: 0.85s; }
+        .s-in:nth-child(4) { animation-delay: 1.15s; }
+        .s-in:nth-child(5) { animation-delay: 1.45s; }
+        @keyframes fadeup { to { opacity: 1; transform: translateY(0); } }
+
+        /* ── Video layer ── */
+        #video-layer {
+            position: absolute; inset: 0; z-index: 1;
+            overflow: hidden; background: #000;
+        }
+        #video-layer iframe {
+            position: absolute; top: 50%; left: 50%;
+            width:  max(100%, calc(100vh * 16 / 9));
+            height: max(100%, calc(100vw * 9 / 16));
+            transform: translate(-50%, -50%);
+            border: none;
+        }
+
+        /* ── Lower-third ── */
+        #lower-third {
+            position: absolute; bottom: clamp(1.5rem, 5vh, 3rem);
+            width: 100%; text-align: center;
+            z-index: 25; opacity: 0; pointer-events: none;
+            transition: opacity 0.9s ease;
+        }
+        .lt-rule { width: 36px; height: 1px; background: rgba(255,255,0,0.3); margin: 0 auto 0.8rem; }
+        .lt-name {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1rem, 2.4vw, 1.55rem);
+            color: rgba(255,255,255,0.8); margin-bottom: 0.2rem;
+        }
+        .lt-role {
+            font-size: clamp(0.58rem, 0.95vw, 0.75rem);
+            font-weight: 300; letter-spacing: 0.22em;
+            text-transform: uppercase; color: rgba(255,255,255,0.35);
+        }
+
+        /* ── Closing quote ── */
+        #quote-layer {
+            position: absolute; inset: 0; z-index: 20;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none;
+        }
+        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; }
+        #quote-content {
+            position: relative; max-width: 860px;
+            padding: 2rem 2.5rem; text-align: center;
+            opacity: 0; transform: translateX(-80px);
+        }
+        #quote-content blockquote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1rem, 2.8vw, 2.4rem);
+            font-weight: 600; line-height: 1.42;
+            color: #fff; margin-bottom: 1.5rem;
+        }
+        .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
+        #quote-content cite {
+            font-size: clamp(0.6rem, 1vw, 0.82rem);
+            font-weight: 300; font-style: normal;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            color: rgba(255,255,255,0.42);
+        }
+
+    </style>
+</head>
+<body>
+<div id="stage">
+
+    <!-- Splash: MR. L. -->
+    <div id="splash">
+        <img class="s-in s-logo-img" src="https://i.imgur.com/nbJAxvM.png" alt="Mr. Lang" onerror="this.src='https://i.imgur.com/nbJAxvM.jpg'">
+        <div class="s-in s-welcome">welcome, come on in and find your seat, and leave your phones and backpacks on the wall</div>
+        <div class="s-in s-divider"></div>
+        <div class="s-in s-ring">
+            <!-- threshold / enter symbol: a doorway arch -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15"/>
+                <line x1="1" y1="21" x2="23" y2="21"/>
+                <path d="M10 21v-5a2 2 0 0 1 4 0v5"/>
+            </svg>
+        </div>
+        <div class="s-in s-cta">Tap to enter</div>
+    </div>
+
+    <!-- Video -->
+    <div id="video-layer"></div>
+
+    <!-- Speaker lower-third -->
+    <div id="lower-third">
+        <div class="lt-rule"></div>
+        <div class="lt-name">Christopher Burt</div>
+        <div class="lt-role">Clinical Supervisor</div>
+    </div>
+
+    <!-- Closing quote -->
+    <div id="quote-layer">
+        <div id="quote-bg"></div>
+        <div id="quote-content">
+            <blockquote>"I'm feeling really confident about this... I just wanted to say, <span class="hl">again: your ability to</span> <span class="hl">facilitate critical thinking</span> level questions in engaging those students <span class="hl">is just off the chart.</span>"</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+const VIDEO_ID  = 'pRGMnHA6KNI';
+const QUOTE_AT  = 0.88;
+const START_AT  = 7;
+
+const splash       = document.getElementById('splash');
+const videoLayer   = document.getElementById('video-layer');
+const lowerThird   = document.getElementById('lower-third');
+const quoteBg      = document.getElementById('quote-bg');
+const quoteContent = document.getElementById('quote-content');
+
+let player   = null;
+let started  = false;
+let duration = 0;
+let poller   = null;
+
+/* Load YT IFrame API immediately */
+var tag = document.createElement('script');
+tag.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(tag);
+
+/*
+ * VIDEO PLAYS FROM PAGE LOAD — muted, behind the splash.
+ * By the time the user reads the welcome and clicks Enter,
+ * the video is already running. Click just fades splash + ramps audio.
+ */
+window.onYouTubeIframeAPIReady = function() {
+    var div = document.createElement('div');
+    div.id = 'yt-player';
+    videoLayer.appendChild(div);
+
+    var vars = {
+        autoplay:       1,
+        mute:           1,
+        start:          START_AT,
+        playsinline:    1,
+        controls:       0,
+        rel:            0,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        disablekb:      1
+    };
+    if (window.location.protocol.indexOf('http') === 0) {
+        vars.origin = window.location.origin;
+    }
+    player = new YT.Player('yt-player', {
+        videoId:    VIDEO_ID,
+        playerVars: vars,
+        events: {
+            onReady: function(e) {
+                /* Start playing muted immediately — buffers and runs behind splash */
+                e.target.setVolume(0);
+                e.target.playVideo();
+            },
+            onStateChange: onState
+        }
+    });
+};
+
+/* ── Splash click → reveal video + fade audio up ── */
+function begin(e) {
+    if (e.type === 'touchstart') e.preventDefault();
+    if (started) return;
+    started = true;
+
+    /* Unmute and ramp audio from 0 → 100 over 2 seconds */
+    if (player) {
+        player.unMute();
+        var vol = 0;
+        var ramp = setInterval(function() {
+            vol += 5;
+            if (vol >= 100) { vol = 100; clearInterval(ramp); }
+            player.setVolume(vol);
+        }, 100);
+    }
+
+    /* Splash fades out revealing the already-playing video */
+    splash.classList.add('fading');
+    setTimeout(function() { splash.style.display = 'none'; }, 4500);
+
+    /* Lower-third: Christopher Burt credentials */
+    setTimeout(function() {
+        lowerThird.style.opacity = '1';
+        setTimeout(function() { lowerThird.style.opacity = '0'; }, 3500);
+    }, 1500);
+}
+
+splash.addEventListener('click',      begin);
+splash.addEventListener('touchstart', begin, { passive: false });
+
+function onState(e) {
+    if (e.data === YT.PlayerState.PLAYING) {
+        duration = player.getDuration();
+        if (started) startPolling();
+    }
+    if (e.data === YT.PlayerState.ENDED) finalise();
+}
+
+function startPolling() {
+    if (poller) return;
+    poller = setInterval(function() {
+        if (!player || !duration) return;
+        var pct = player.getCurrentTime() / duration;
+        if (pct >= QUOTE_AT) drawQuote(Math.min((pct - QUOTE_AT) / (1 - QUOTE_AT), 1));
+    }, 120);
+}
+
+function stopPolling() { if (poller) { clearInterval(poller); poller = null; } }
+
+function drawQuote(p) {
+    var e = 1 - Math.pow(1 - p, 3);
+    quoteBg.style.opacity        = e.toFixed(3);
+    quoteContent.style.opacity   = e.toFixed(3);
+    quoteContent.style.transform = 'translateX(' + (-80 * (1 - e)).toFixed(1) + 'px)';
+}
+
+function finalise() {
+    stopPolling();
+    drawQuote(1);
+    setTimeout(function() { videoLayer.style.display = 'none'; }, 600);
+
+    /* Hold the quote briefly, then dissolve into nothing */
+    setTimeout(function() {
+        document.body.classList.add('dissolved');
+    }, 1500);
+}
+</script>
+</body>
+</html>
