@@ -37,7 +37,8 @@
             font-family: 'Inter', system-ui, sans-serif;
             transition: background 2s ease;
         }
-        body.dissolved { background: #003300; }
+        /* Fade to black at the very end before redirect */
+        body.dissolved { background: #000000; }
         body.dissolved #stage { opacity: 0; pointer-events: none; }
 
         /* ── Wrapper ── */
@@ -196,7 +197,9 @@
 
         /* ── Scrolling Quotes Layer ── */
         #quote-layer {
-            position: absolute; inset: 0; z-index: 20;
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 20;
             pointer-events: none;
             display: flex;
             flex-direction: column;
@@ -208,7 +211,7 @@
        
         .marquee-wrapper {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
             transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
             width: 100%;
         }
@@ -217,17 +220,27 @@
             transform: translateY(0);
         }
 
+        /* 
+           CRITICAL FIX: Set base transforms so there's no jump when animation starts.
+        */
         .marquee-row {
             display: flex;
             width: max-content;
             will-change: transform;
         }
+        .move-right, .move-right-fast { transform: translateX(-50%); }
+        .move-left { transform: translateX(0); }
+
+        /* Animations ONLY apply when the wrapper is active */
+        .marquee-wrapper.active .move-right { animation: scrollRight 90s linear infinite; }
+        .marquee-wrapper.active .move-left { animation: scrollLeft 100s linear infinite; }
+        .marquee-wrapper.active .move-right-fast { animation: scrollRight 80s linear infinite; }
 
         .marquee-content {
             display: flex;
             gap: 4vw;
             padding-right: 4vw; 
-            flex-shrink: 0; /* CRITICAL FIX: Prevents browser from crushing the text */
+            flex-shrink: 0; /* Prevents text crushing */
         }
 
         .quote-item {
@@ -236,7 +249,7 @@
             justify-content: center;
             gap: 0.5rem;
             pointer-events: auto; 
-            flex-shrink: 0; /* CRITICAL FIX */
+            flex-shrink: 0;
         }
 
         .quote-item blockquote {
@@ -248,11 +261,10 @@
             white-space: nowrap;
         }
 
-        /* --- REFINED HIGHLIGHTER LOGIC --- */
         .quote-item blockquote strong {
             font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700;
-            color: #000000; 
+            color: #000000;
             background-size: 100% 105%;
             background-position: center; 
             padding: 0.15rem 0.2rem; 
@@ -292,15 +304,6 @@
             color: rgba(255, 255, 255, 0.5);
             white-space: nowrap;
         }
-
-        /* 
-           CRITICAL FIX: Animations ONLY start when the wrapper gets the .active class. 
-           This ensures they start at exactly 0% position when they fade in, 
-           guaranteeing your favorites are seen immediately.
-        */
-        .marquee-wrapper.active .move-right { animation: scrollRight 90s linear infinite; }
-        .marquee-wrapper.active .move-left { animation: scrollLeft 100s linear infinite; }
-        .marquee-wrapper.active .move-right-fast { animation: scrollRight 80s linear infinite; }
 
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
@@ -354,17 +357,18 @@
     <div id="quote-layer">
         <div id="quote-bg"></div>
         
-        <!-- ROW 1: Left to Right -->
+        <!-- ROW 1: Left to Right (Moves Right) -->
         <div class="marquee-wrapper">
             <div class="marquee-row move-right">
                 <div class="marquee-content">
+                    <!-- Favorite #1 & #3 placed FIRST so they start on the left and move right -->
                     <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"There is a <strong class="hl-v2">very productive hum & tone</strong> throughout the class."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
+                <!-- Duplicate -->
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
@@ -375,22 +379,23 @@
             </div>
         </div>
 
-        <!-- ROW 2: Right to Left -->
+        <!-- ROW 2: Right to Left (Moves Left) -->
         <div class="marquee-wrapper">
             <div class="marquee-row move-left">
                 <div class="marquee-content">
-                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <!-- Favorite #2 placed THIRD so it starts on the right side of the screen and glides left into view -->
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
+                <!-- Duplicate -->
                 <div class="marquee-content">
-                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
             </div>
@@ -400,13 +405,14 @@
         <div class="marquee-wrapper">
             <div class="marquee-row move-right-fast">
                 <div class="marquee-content">
+                    <!-- Favorite #5 placed FIRST so it starts on the left and moves right -->
                     <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"Michael made <strong class="hl-v2">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is already a <strong class="hl-v3">highly effective teacher</strong> and has a long, wonderful career ahead of him!"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He has a <strong class="hl-v2">deep appreciation for the human intellect.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
+                <!-- Duplicate -->
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
