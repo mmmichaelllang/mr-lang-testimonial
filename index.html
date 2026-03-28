@@ -49,7 +49,7 @@
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 700;
-            font-style: italic;
+            font-style: normal;
             color: #FEF612;
             text-align: center;
             letter-spacing: -0.05em;
@@ -96,7 +96,7 @@
             transition: border-color 0.7s, box-shadow 0.7s;
             animation: s-breathe 4s ease-in-out infinite;
         }
-        .s-ring svg { color: rgba(255,255,255,0.32); transition: color 0.6s; }
+        .s-ring svg { color: #FEF612; filter: drop-shadow(0 0 12px #FEF612) brightness(1.3); transition: color 0.6s, filter 0.6s; }
         #splash:hover .s-ring { 
             border-color: rgba(255,255,0,0.45); 
             box-shadow: 0 0 60px rgba(255,255,0,0.06); 
