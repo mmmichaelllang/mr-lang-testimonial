@@ -262,3 +262,388 @@
 
         /* quotes layer */
         #quote-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        #quote-bg {
+            position: absolute;
+            inset: 0;
+            background: #003300;
+            opacity: 0;
+        }
+
+        .quote-item {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+
+        .quote-item blockquote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
+            font-weight: 600;
+            line-height: 1.4;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .hl {
+            background: #ffff00;
+            color: #003300;
+            padding: 0.02em 0.2em;
+            font-weight: 700;
+        }
+
+        .quote-item cite {
+            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
+            font-weight: 300;
+            font-style: normal;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.42);
+        }
+
+        /* quote positions */
+        .pos-1 {
+            top: 12%;
+            left: 6%;
+            width: 26%;
+            transform: translateY(-20px);
+            text-align: left;
+        }
+
+        .pos-2 {
+            top: 10%;
+            right: 6%;
+            width: 26%;
+            transform: translateY(-20px);
+            text-align: right;
+        }
+
+        .pos-3 {
+            top: 42%;
+            left: 4%;
+            width: 26%;
+            transform: translateX(-20px);
+            text-align: left;
+        }
+
+        .pos-4 {
+            top: 45%;
+            left: 50%;
+            width: 34%;
+            transform: translate(-50%, -20px);
+            text-align: center;
+        }
+
+        .pos-4 blockquote {
+            font-size: clamp(0.9rem, 1.6vw, 1.4rem);
+            margin-bottom: 0.8rem;
+        }
+
+        .pos-5 {
+            top: 42%;
+            right: 4%;
+            width: 26%;
+            transform: translateX(20px);
+            text-align: right;
+        }
+
+        .pos-6 {
+            bottom: 12%;
+            left: 10%;
+            width: 26%;
+            transform: translateY(20px);
+            text-align: left;
+        }
+
+        .pos-7 {
+            bottom: 10%;
+            right: 10%;
+            width: 26%;
+            transform: translateY(20px);
+            text-align: right;
+        }
+
+        .pos-1.active,
+        .pos-2.active,
+        .pos-6.active,
+        .pos-7.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .pos-3.active,
+        .pos-5.active {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .pos-4.active {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            #quote-layer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem;
+            }
+
+            .quote-item {
+                position: relative;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                transform: translateY(15px) !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 0.8rem;
+            }
+
+            .quote-item.active {
+                transform: translateY(0) !important;
+                opacity: 1;
+            }
+
+            .quote-item blockquote {
+                font-size: clamp(0.7rem, 3vw, 1rem);
+                margin-bottom: 0.2rem;
+            }
+
+            .pos-4 blockquote {
+                font-size: clamp(0.8rem, 3.5vw, 1.1rem);
+            }
+
+            .quote-item cite {
+                font-size: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="stage">
+
+    <!-- SPLASH with glowing DOOR + "TAP TO ENTER" that now shares the SAME pulseGlow animation as MRL above -->
+    <div id="splash">
+        <div class="s-in s-logo-img">𐊎ꝛꛚ</div>
+        <div class="s-in s-welcome">welcome, come in and find your seat, you can<br> leave your phones and backpacks against the wall</div>
+        <div class="s-in s-divider"></div>
+
+        <!-- GROUP containing doorway icon + TAP TO ENTER text — BOTH glow like the "MRL above" -->
+        <div class="enter-glow-group s-in">
+            <div class="s-ring">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15" />
+                    <line x1="1" y1="21" x2="23" y2="21" />
+                    <path d="M10 21v-5a2 2 0 0 1 4 0v5" />
+                </svg>
+            </div>
+            <div class="s-cta">Tap to enter</div>
+        </div>
+    </div>
+
+    <!-- Video layer (YouTube iframe) -->
+    <div id="video-layer"></div>
+
+    <!-- lower-third speaker info -->
+    <div id="lower-third">
+        <div class="lt-rule"></div>
+        <div class="lt-name">Christopher Burt</div>
+        <div class="lt-role">Clinical Supervisor</div>
+    </div>
+
+    <!-- closing quotes layer -->
+    <div id="quote-layer">
+        <div id="quote-bg"></div>
+        <div class="quote-item pos-1">
+            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item pos-2">
+            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item pos-3">
+            <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item pos-4">
+            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item pos-5">
+            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item pos-6">
+            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item pos-7">
+            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+    </div>
+</div>
+
+<script>
+    const VIDEO_ID = 'pRGMnHA6KNI';
+    const QUOTE_AT = 0.88;
+    const START_AT = 3;
+
+    const splash = document.getElementById('splash');
+    const videoLayer = document.getElementById('video-layer');
+    const lowerThird = document.getElementById('lower-third');
+    const quoteBg = document.getElementById('quote-bg');
+
+    let player = null;
+    let started = false;
+    let duration = 0;
+    let poller = null;
+
+    // load YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+
+    // API ready: create player, autoplay muted from START_AT
+    window.onYouTubeIframeAPIReady = function () {
+        const div = document.createElement('div');
+        div.id = 'yt-player';
+        videoLayer.appendChild(div);
+
+        const vars = {
+            autoplay: 1,
+            mute: 1,
+            start: START_AT,
+            playsinline: 1,
+            controls: 0,
+            rel: 0,
+            modestbranding: 1,
+            iv_load_policy: 3,
+            disablekb: 1
+        };
+        if (window.location.protocol.indexOf('http') === 0) {
+            vars.origin = window.location.origin;
+        }
+
+        player = new YT.Player('yt-player', {
+            videoId: VIDEO_ID,
+            playerVars: vars,
+            events: {
+                onReady: function (e) {
+                    e.target.setVolume(0);
+                    e.target.playVideo();
+                },
+                onStateChange: onState
+            }
+        });
+    };
+
+    // begin experience: unmute, fade splash, reveal video & show lower-third
+    function begin(e) {
+        if (e.type === 'touchstart') e.preventDefault();
+        if (started) return;
+        started = true;
+
+        if (player) {
+            player.unMute();
+            player.setVolume(100);
+            duration = player.getDuration();
+            if (duration && !poller) startPolling();
+        }
+
+        splash.classList.add('fading');
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 4500);
+
+        // lower third appears 1.5s after click
+        setTimeout(() => {
+            lowerThird.style.opacity = '1';
+            setTimeout(() => {
+                lowerThird.style.opacity = '0';
+            }, 3500);
+        }, 1500);
+    }
+
+    splash.addEventListener('click', begin);
+    splash.addEventListener('touchstart', begin, { passive: false });
+
+    function onState(e) {
+        if (e.data === YT.PlayerState.PLAYING) {
+            duration = player.getDuration();
+            if (started && !poller) startPolling();
+        }
+        if (e.data === YT.PlayerState.ENDED && started) finalise();
+    }
+
+    function startPolling() {
+        if (poller) return;
+        poller = setInterval(() => {
+            if (!player || !duration) return;
+            const current = player.getCurrentTime();
+            const pct = current / duration;
+            if (pct >= QUOTE_AT) {
+                const progress = Math.min((pct - QUOTE_AT) / (1 - QUOTE_AT), 1);
+                drawQuote(progress);
+            }
+        }, 120);
+    }
+
+    function stopPolling() {
+        if (poller) {
+            clearInterval(poller);
+            poller = null;
+        }
+    }
+
+    function drawQuote(p) {
+        const eased = 1 - Math.pow(1 - p, 3);
+        quoteBg.style.opacity = eased.toFixed(3);
+
+        const quotes = document.querySelectorAll('.quote-item');
+        if (p > 0.05) quotes[0]?.classList.add('active');
+        if (p > 0.15) quotes[1]?.classList.add('active');
+        if (p > 0.25) quotes[2]?.classList.add('active');
+        if (p > 0.35) quotes[3]?.classList.add('active');
+        if (p > 0.45) quotes[4]?.classList.add('active');
+        if (p > 0.55) quotes[5]?.classList.add('active');
+        if (p > 0.65) quotes[6]?.classList.add('active');
+    }
+
+    function finalise() {
+        stopPolling();
+        drawQuote(1);
+        setTimeout(() => {
+            if (videoLayer) videoLayer.style.display = 'none';
+        }, 600);
+
+        setTimeout(() => {
+            document.body.classList.add('dissolved');
+        }, 8000);
+
+        setTimeout(() => {
+            window.location.replace('https://main.mrla.ng');
+        }, 10000);
+    }
+
+    // optional: preconnect/performance helpers
+    const linkPrefetch = document.createElement('link');
+    linkPrefetch.rel = 'prefetch';
+    linkPrefetch.href = 'https://main.mrla.ng';
+    document.head.appendChild(linkPrefetch);
+</script>
+
+<!-- background preload iframe (keeps portfolio loading in background) -->
+<iframe src="https://main.mrla.ng" style="display:none; width:0; height:0; visibility:hidden;" tabindex="-1" aria-hidden="true"></iframe>
+</body>
+</html>
