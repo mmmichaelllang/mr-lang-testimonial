@@ -2,92 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale
-    <title>𐊎ꝛꛚ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>𐊎ꝛꛚ · The Threshold</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Warm up connection to portfolio while video plays -->
     <link rel="preconnect" href="https://main.mrla.ng">
     <link rel="dns-prefetch" href="https://main.mrla.ng">
-    <link rel="prefetch" href="https://main.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         html {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             background: #003300;
         }
+
         body {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             background: #003300;
             font-family: 'Inter', system-ui, sans-serif;
             transition: background 2s ease;
         }
-        body.dissolved { background: #003300; }
-        body.dissolved #stage { opacity: 0; pointer-events: none; }
 
-        /* ── Wrapper ── */
-        #stage { position: absolute; inset: 0; transition: opacity 2s ease; }
-
-        /* ── Splash: MR. L. ── */
-        #splash {
-            position: absolute; inset: 0; z-index: 50;
+        body.dissolved {
             background: #003300;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
+        }
+
+        body.dissolved #stage {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* main stage */
+        #stage {
+            position: absolute;
+            inset: 0;
+            transition: opacity 2s ease;
+        }
+
+        /* ========== SPLASH ========== */
+        #splash {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            background: #003300;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1);
-            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            user-select: none;
+            backdrop-filter: blur(0px);
         }
-        #splash.fading { opacity: 0; pointer-events: none; }
 
-        /* TEXT LOGO: 𐊎ꝛꛚ with yellow pulsing glow (non-bold) */
-.s-logo-img {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2.2rem, 8vw, 4.5rem);
-    font-weight: 400;      /* ← Changed from 700 to 400 (non-bold) */
-    font-style: normal;
-    color: #FEF612;
-    text-align: center;
-    letter-spacing: -0.05em;
-    filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
-    animation: pulseGlow 2.5s ease-in-out infinite both;
-    line-height: 1;
-}
+        #splash.fading {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-/* TAP TO ENTER glow */
-.s-cta {
-    font-size: clamp(0.5rem, 0.7vw, 0.58rem);
-    font-weight: 600; 
-    letter-spacing: 0.4em;
-    text-transform: uppercase; 
-    color: #FEF612;                          /* ← Bright yellow */
-    filter: drop-shadow(0 0 4px #FEF612);    /* ← Subtle glow */
-    transition: filter 0.6s;
-}
+        /* MAIN LOGO: 𐊎ꝛꛚ — yellow pulsing glow (non-bold) */
+        .s-logo-img {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            font-weight: 400;
+            font-style: normal;
+            color: #FEF612;
+            text-align: center;
+            letter-spacing: -0.05em;
+            filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
+            animation: pulseGlow 2.5s ease-in-out infinite both;
+            line-height: 1;
+        }
 
-#splash:hover .s-cta {
-    filter: drop-shadow(0 0 8px #FEF612) brightness(1.2);
-}
-
-        /* soft yellow pulse animation */
+        /* ----- PULSE GLOW ANIMATION (the "MRL above" effect) ----- */
         @keyframes pulseGlow {
             0%, 100% {
                 filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
+                text-shadow: 0 0 4px #FEF612;
             }
             50% {
-                filter: drop-shadow(0 0 16px #FEF612) brightness(1.3);
+                filter: drop-shadow(0 0 20px #FEF612) brightness(1.35);
+                text-shadow: 0 0 12px #FEF612;
             }
         }
 
+        /* welcome text */
         .s-welcome {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(0.8rem, 2vw, 1.25rem);
-            font-weight: 400; font-style: italic;
-            color: rgba(255,255,255,0.28);
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.28);
             letter-spacing: 0.04em;
             text-align: center;
             max-width: 520px;
@@ -96,342 +113,152 @@
         }
 
         .s-divider {
-            width: 44px; height: 1px;
-            background: rgba(255,255,255,0.09);
+            width: 44px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.09);
             margin-bottom: clamp(2rem, 7vh, 5rem);
         }
 
-        
-
-        @keyframes s-breathe {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50%       { transform: scale(1.045); opacity: 1; }
+        /* ========== ✦ ENHANCED TAP SECTION: doorway + "TAP TO ENTER" ✦ ========== */
+        /* container that groups the door symbol and text — both get the same pulsing glow as MRL */
+        .enter-glow-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            /* inherit the pulseGlow animation to make both elements glow together */
+            animation: pulseGlow 2.5s ease-in-out infinite both;
+            filter: drop-shadow(0 0 6px #FEF612);
+            transition: filter 0.2s ease;
         }
 
+        /* doorway icon wrapper — bright yellow, animated glow via parent */
+        .s-ring {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FEF612;
+            transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .s-ring svg {
+            width: 32px;
+            height: 32px;
+            stroke: #FEF612;
+            stroke-width: 1.6;
+            filter: drop-shadow(0 0 4px #FEF612);
+            transition: all 0.2s;
+        }
+
+        /* "TAP TO ENTER" text — matches glow and color from MRL logo */
         .s-cta {
-            font-size: clamp(0.5rem, 0.7vw, 0.58rem);
-            font-weight: 600; letter-spacing: 0.4em;
-            text-transform: uppercase; color: rgba(255,255,255,0.16);
+            font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+            font-weight: 700;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: #FEF612;
+            background: transparent;
+            text-shadow: 0 0 4px #FEF612;
+            transition: letter-spacing 0.3s ease;
         }
 
+        /* subtle hover / tap lift effect — keeps glowing but adds slight scale */
+        #splash:hover .enter-glow-group {
+            transform: scale(1.02);
+            filter: drop-shadow(0 0 12px #FEF612) brightness(1.2);
+        }
+
+        #splash:active .enter-glow-group {
+            transform: scale(0.98);
+        }
+
+        /* entrance fade-up animations for all splash elements */
         .s-in {
-            opacity: 0; transform: translateY(16px);
+            opacity: 0;
+            transform: translateY(16px);
             animation: fadeup 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
-        .s-in:nth-child(1) { animation-delay: 0.2s; }
-        .s-in:nth-child(2) { animation-delay: 0.5s; }
-        .s-in:nth-child(3) { animation-delay: 0.85s; }
-        .s-in:nth-child(4) { animation-delay: 1.15s; }
-        .s-in:nth-child(5) { animation-delay: 1.45s; }
-        @keyframes fadeup { to { opacity: 1; transform: translateY(0); } }
 
-        /* ── Video layer ── */
-        #video-layer {
-            position: absolute; inset: 0; z-index: 1;
-            overflow: hidden; background: #000;
+        .s-in:nth-child(1) {
+            animation-delay: 0.2s;
         }
+
+        .s-in:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .s-in:nth-child(3) {
+            animation-delay: 0.85s;
+        }
+
+        .s-in:nth-child(4) {
+            animation-delay: 1.15s;
+        }
+
+        .s-in:nth-child(5) {
+            animation-delay: 1.45s;
+        }
+
+        @keyframes fadeup {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== VIDEO LAYER ========== */
+        #video-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            background: #000;
+        }
+
         #video-layer iframe {
-            position: absolute; top: 50%; left: 50%;
-            width:  max(100%, calc(100vh * 16 / 9));
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: max(100%, calc(100vh * 16 / 9));
             height: max(100%, calc(100vw * 9 / 16));
             transform: translate(-50%, -50%);
             border: none;
         }
 
-        /* ── Lower-third ── */
+        /* lower-third (speaker) */
         #lower-third {
-            position: absolute; bottom: clamp(1.5rem, 5vh, 3rem);
-            width: 100%; text-align: center;
-            z-index: 25; opacity: 0; pointer-events: none;
+            position: absolute;
+            bottom: clamp(1.5rem, 5vh, 3rem);
+            width: 100%;
+            text-align: center;
+            z-index: 25;
+            opacity: 0;
+            pointer-events: none;
             transition: opacity 0.9s ease;
         }
-        .lt-rule { width: 36px; height: 1px; background: rgba(255,255,0,0.3); margin: 0 auto 0.8rem; }
+
+        .lt-rule {
+            width: 36px;
+            height: 1px;
+            background: rgba(255, 255, 0, 0.3);
+            margin: 0 auto 0.8rem;
+        }
+
         .lt-name {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(1rem, 2.4vw, 1.55rem);
-            color: rgba(255,255,255,0.8); margin-bottom: 0.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.2rem;
         }
+
         .lt-role {
             font-size: clamp(0.58rem, 0.95vw, 0.75rem);
-            font-weight: 300; letter-spacing: 0.22em;
-            text-transform: uppercase; color: rgba(255,255,255,0.35);
+            font-weight: 300;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.35);
         }
 
-
-        /* ── Closing quotes ── */
+        /* quotes layer */
         #quote-layer {
-            position: absolute; inset: 0; z-index: 20;
-            pointer-events: none;
-        }
-        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; }
-       
-        .quote-item {
-            position: absolute;
-            opacity: 0;
-            transition: opacity 1.5s ease, transform 1.5s ease;
-        }
-        .quote-item blockquote {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
-            font-weight: 600; line-height: 1.4;
-            color: #fff; margin-bottom: 0.5rem;
-        }
-        .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
-        .quote-item cite {
-            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
-            font-weight: 300; font-style: normal;
-            letter-spacing: 0.16em; text-transform: uppercase;
-            color: rgba(255,255,255,0.42);
-        }
-
-
-        .pos-1 { top: 12%; left: 6%; width: 26%; transform: translateY(-20px); text-align: left; }
-        .pos-2 { top: 10%; right: 6%; width: 26%; transform: translateY(-20px); text-align: right; }
-        .pos-3 { top: 42%; left: 4%; width: 26%; transform: translateX(-20px); text-align: left; }
-        .pos-4 { top: 45%; left: 50%; width: 34%; transform: translate(-50%, -20px); text-align: center; }
-        .pos-4 blockquote { font-size: clamp(0.9rem, 1.6vw, 1.4rem); margin-bottom: 0.8rem; }
-        .pos-5 { top: 42%; right: 4%; width: 26%; transform: translateX(20px); text-align: right; }
-        .pos-6 { bottom: 12%; left: 10%; width: 26%; transform: translateY(20px); text-align: left; }
-        .pos-7 { bottom: 10%; right: 10%; width: 26%; transform: translateY(20px); text-align: right; }
-
-
-        .pos-1.active, .pos-2.active, .pos-6.active, .pos-7.active { transform: translateY(0); opacity: 1; }
-        .pos-3.active, .pos-5.active { transform: translateX(0); opacity: 1; }
-        .pos-4.active { transform: translate(-50%, 0); opacity: 1; }
-
-
-        @media (max-width: 768px) {
-            #quote-layer {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-            }
-            .quote-item {
-                position: relative;
-                top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
-                transform: translateY(15px) !important;
-                width: 100% !important;
-                text-align: center !important;
-                margin-bottom: 0.8rem;
-            }
-            .quote-item.active {
-                transform: translateY(0) !important;
-                opacity: 1;
-            }
-            .quote-item blockquote { font-size: clamp(0.7rem, 3vw, 1rem); margin-bottom: 0.2rem; }
-            .pos-4 blockquote { font-size: clamp(0.8rem, 3.5vw, 1.1rem); }
-            .quote-item cite { font-size: 0.5rem; }
-        }
-
-
-    </style>
-</head>
-<body>
-<div id="stage">
-
-    <!-- Splash: 𐊎ꝛꛚ -->
-<div id="splash">
-    <div class="s-in s-logo-img">𐊎ꝛꛚ</div>
-    <div class="s-in s-welcome">welcome, come in and find your seat, you can<br> leave your phones and backpacks against the wall</div>
-    <div class="s-in s-divider"></div>
-    <div class="s-in s-ring">
-        <!-- threshold / enter symbol: a doorway arch -->
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15"/>
-            <line x1="1" y1="21" x2="23" y2="21"/>
-            <path d="M10 21v-5a2 2 0 0 1 4 0v5"/>
-        </svg>
-    </div>
-    <div class="s-in s-cta">Tap to enter</div>
-</div>
-
-    <!-- Video -->
-    <div id="video-layer"></div>
-
-    <!-- Speaker lower-third -->
-    <div id="lower-third">
-        <div class="lt-rule"></div>
-        <div class="lt-name">Christopher Burt</div>
-        <div class="lt-role">Clinical Supervisor</div>
-    </div>
-
-
-    <!-- Closing quotes -->
-    <div id="quote-layer">
-        <div id="quote-bg"></div>
-        <div class="quote-item pos-1">
-            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-2">
-            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-3">
-            <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-4">
-            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-5">
-            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-6">
-            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-7">
-            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-    </div>
-
-
-</div>
-
-<script>
-const VIDEO_ID  = 'pRGMnHA6KNI';
-const QUOTE_AT  = 0.88;
-const START_AT  = 3;
-
-const splash       = document.getElementById('splash');
-const videoLayer   = document.getElementById('video-layer');
-const lowerThird   = document.getElementById('lower-third');
-const quoteBg      = document.getElementById('quote-bg');
-const quoteContent = document.getElementById('quote-content');
-
-let player   = null;
-let started  = false;
-let duration = 0;
-let poller   = null;
-
-/* Load YT IFrame API immediately */
-var tag = document.createElement('script');
-tag.src = 'https://www.youtube.com/iframe_api';
-document.head.appendChild(tag);
-
-/*
- * VIDEO PLAYS FROM PAGE LOAD — muted, behind the splash.
- * By the time the user reads the welcome and clicks Enter,
- * the video is already running. Click just fades splash + ramps audio.
- */
-window.onYouTubeIframeAPIReady = function() {
-    var div = document.createElement('div');
-    div.id = 'yt-player';
-    videoLayer.appendChild(div);
-
-    var vars = {
-        autoplay:       1,
-        mute:           1,
-        start:          START_AT,
-        playsinline:    1,
-        controls:       0,
-        rel:            0,
-        modestbranding: 1,
-        iv_load_policy: 3,
-        disablekb:      1
-    };
-    if (window.location.protocol.indexOf('http') === 0) {
-        vars.origin = window.location.origin;
-    }
-    player = new YT.Player('yt-player', {
-        videoId:    VIDEO_ID,
-        playerVars: vars,
-        events: {
-            onReady: function(e) {
-                /* Start playing muted immediately — buffers and runs behind splash */
-                e.target.setVolume(0);
-                e.target.playVideo();
-            },
-            onStateChange: onState
-        }
-    });
-};
-
-/* ── Splash click → reveal video + fade audio up ── */
-function begin(e) {
-    if (e.type === 'touchstart') e.preventDefault();
-    if (started) return;
-    started = true;
-
-    /* Unmute instantly — video is already playing from page load, no seek needed */
-    if (player) {
-        player.unMute();
-        player.setVolume(100);
-        duration = player.getDuration();
-        if (duration) startPolling();
-    }
-
-    /* Splash fades out revealing the already-playing video */
-    splash.classList.add('fading');
-    setTimeout(function() { splash.style.display = 'none'; }, 4500);
-
-    /* Lower-third: Christopher Burt credentials */
-    setTimeout(function() {
-        lowerThird.style.opacity = '1';
-        setTimeout(function() { lowerThird.style.opacity = '0'; }, 3500);
-    }, 1500);
-}
-
-splash.addEventListener('click',      begin);
-splash.addEventListener('touchstart', begin, { passive: false });
-
-function onState(e) {
-    if (e.data === YT.PlayerState.PLAYING) {
-        duration = player.getDuration();
-        if (started && !poller) startPolling();
-    }
-    if (e.data === YT.PlayerState.ENDED && started) finalise();
-}
-
-function startPolling() {
-    if (poller) return;
-    poller = setInterval(function() {
-        if (!player || !duration) return;
-        var pct = player.getCurrentTime() / duration;
-        if (pct >= QUOTE_AT) drawQuote(Math.min((pct - QUOTE_AT) / (1 - QUOTE_AT), 1));
-    }, 120);
-}
-
-function stopPolling() { if (poller) { clearInterval(poller); poller = null; } }
-
-function drawQuote(p) {
-    var e = 1 - Math.pow(1 - p, 3);
-    quoteBg.style.opacity = e.toFixed(3);
-   
-    const quotes = document.querySelectorAll('.quote-item');
-    if (p > 0.05) quotes[0].classList.add('active');
-    if (p > 0.15) quotes[1].classList.add('active');
-    if (p > 0.25) quotes[2].classList.add('active');
-    if (p > 0.35) quotes[3].classList.add('active');
-    if (p > 0.45) quotes[4].classList.add('active');
-    if (p > 0.55) quotes[5].classList.add('active');
-    if (p > 0.65) quotes[6].classList.add('active');
-}
-
-function finalise() {
-    stopPolling();
-    drawQuote(1);
-    setTimeout(function() { videoLayer.style.display = 'none'; }, 600);
-
-
-    /* Hold the quotes briefly, then dissolve and redirect to portfolio */
-    setTimeout(function() {
-        document.body.classList.add('dissolved');
-    }, 8000);
-    setTimeout(function() {
-        window.location.replace('https://main.mrla.ng');
-    }, 10000);
-}
-</script>
-
-<!-- The "Hidden Iframe" Trick: Forces the browser to download all Google Sites JS, fonts, and images in the background while the video plays -->
-<iframe src="https://main.mrla.ng" style="display:none; width:0; height:0; visibility:hidden;" tabindex="-1"></iframe>
-
-</body>
-</html>
