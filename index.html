@@ -265,7 +265,6 @@
             background-position: center; 
             padding: 0.15rem 0.2rem; 
             margin: -0.15rem -0.2rem; 
-            
             background-repeat: no-repeat;
             -webkit-box-decoration-break: clone;
             box-decoration-break: clone;
@@ -306,9 +305,9 @@
         }
 
         /* Marquee Animations - Slowed down for readability */
-        .move-right { animation: moveRight 100s linear infinite; }
-        .move-right-fast { animation: moveRight 90s linear infinite; }
-        .move-left { animation: moveLeft 110s linear infinite; }
+        .move-right { animation: moveRight 90s linear infinite; }
+        .move-right-fast { animation: moveRight 80s linear infinite; }
+        .move-left { animation: moveLeft 100s linear infinite; }
 
         @keyframes moveLeft {
             0% { transform: translateX(0); }
@@ -325,8 +324,6 @@
             .quote-item blockquote { font-size: clamp(1rem, 4vw, 1.4rem); }
             .quote-item cite { font-size: 0.5rem; }
         }
-
-
     </style>
 </head>
 <body>
@@ -361,58 +358,51 @@
         <div class="lt-role">Clinical Supervisor</div>
     </div>
 
-
-    <!-- Closing quotes -->
+    <!-- Scrolling Quotes Layer -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
         
-        <!-- ROW 1: Left to Right -->
+        <!-- ROW 1: Left to Right (Features your #1 and #3 favorites) -->
         <div class="marquee-wrapper">
             <div class="marquee-row move-right">
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"There is a <strong class="hl-v2">very productive hum & tone</strong> throughout the class."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote>"He <strong class="hl-v3">communicates effectively and kindly</strong> with students."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"There is a <strong class="hl-v2">very productive hum & tone</strong> throughout the class."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote>"He <strong class="hl-v3">communicates effectively and kindly</strong> with students."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
             </div>
         </div>
 
-        <!-- ROW 2: Right to Left -->
+        <!-- ROW 2: Right to Left (Features your #2 favorite) -->
         <div class="marquee-wrapper">
             <div class="marquee-row move-left">
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"You pressed them today to <strong class="hl-v3">think deeply & articulate their decisions.</strong>"</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"You pressed them today to <strong class="hl-v3">think deeply & articulate their decisions.</strong>"</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
-                    <div class="quote-item"><blockquote><strong class="hl-v3">"His depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
             </div>
         </div>
 
-        <!-- ROW 3: Left to Right (Slightly Faster) -->
+        <!-- ROW 3: Left to Right (Features your #5 favorite) -->
         <div class="marquee-wrapper">
             <div class="marquee-row move-right-fast">
                 <div class="marquee-content">
@@ -420,23 +410,18 @@
                     <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"Michael made <strong class="hl-v2">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is already a <strong class="hl-v3">highly effective teacher</strong> and has a long, wonderful career ahead of him!"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"You sure are <strong class="hl-v1">respectful with the students</strong> and it's clear that they know & appreciate this."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He has a <strong class="hl-v2">deep appreciation for the human intellect.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
-                <!-- Duplicate for seamless scrolling -->
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"Michael made <strong class="hl-v2">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"He is already a <strong class="hl-v3">highly effective teacher</strong> and has a long, wonderful career ahead of him!"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
-                    <div class="quote-item"><blockquote>"You sure are <strong class="hl-v1">respectful with the students</strong> and it's clear that they know & appreciate this."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
                     <div class="quote-item"><blockquote>"He has a <strong class="hl-v2">deep appreciation for the human intellect.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 <script>
@@ -448,7 +433,6 @@ const splash       = document.getElementById('splash');
 const videoLayer   = document.getElementById('video-layer');
 const lowerThird   = document.getElementById('lower-third');
 const quoteBg      = document.getElementById('quote-bg');
-const quoteContent = document.getElementById('quote-content');
 
 let player   = null;
 let started  = false;
@@ -565,10 +549,10 @@ function finalise() {
     /* Hold the quotes briefly, then dissolve and redirect to portfolio */
     setTimeout(function() {
         document.body.classList.add('dissolved');
-    }, 12000);
+    }, 8000);
     setTimeout(function() {
         window.location.replace('https://main.mrla.ng');
-    }, 14000);
+    }, 10000);
 }
 </script>
 
