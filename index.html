@@ -305,13 +305,9 @@
             white-space: nowrap;
         }
 
-        /* Marquee Animations */
-        
-        /* L to R: Starts at -50% (left) and moves to 0 (right) */
+        /* Marquee Animations - Slowed down for readability */
         .move-right { animation: moveRight 90s linear infinite; }
         .move-right-fast { animation: moveRight 80s linear infinite; }
-        
-        /* R to L: Starts at 0 (right) and moves to -50% (left) */
         .move-left { animation: moveLeft 100s linear infinite; }
 
         @keyframes moveLeft {
@@ -372,7 +368,7 @@
         
         <!-- ROW 1: Left to Right -->
         <div class="marquee-wrapper">
-            <div class="marquee-row scroll-left">
+            <div class="marquee-row move-right">
                 <div class="marquee-content">
                     <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
                     <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
