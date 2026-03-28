@@ -9,7 +9,6 @@
     <!-- Warm up connection to portfolio while video plays -->
     <link rel="preconnect" href="https://main.mrla.ng">
     <link rel="dns-prefetch" href="https://main.mrla.ng">
-    <link rel="prefetch" href="https://main.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -333,5 +332,9 @@ function finalise() {
     }, 3500);
 }
 </script>
+
+<!-- The "Hidden Iframe" Trick: Forces the browser to download all Google Sites JS, fonts, and images in the background while the video plays -->
+<iframe src="https://main.mrla.ng" style="display:none; width:0; height:0; visibility:hidden;" tabindex="-1"></iframe>
+
 </body>
 </html>
