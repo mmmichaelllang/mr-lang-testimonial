@@ -12,6 +12,10 @@
     <link rel="prefetch" href="https://main.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --hl-gold: 255, 215, 0; 
+        }
+
         *,
         *::before,
         *::after {
@@ -56,7 +60,6 @@
             pointer-events: none;
         }
 
-        /* Update .s-logo-img to ensure non-bold and proper bottom margin for spacing */
         .s-logo-img {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: clamp(2.2rem, 8vw, 4.5rem);
@@ -68,8 +71,8 @@
             filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
             animation: pulseGlow 2.5s ease-in-out infinite both;
             line-height: 3 !important;
-            margin-bottom: 1.50rem !important;  /* ADD THIS — creates single line space */
-}
+            margin-bottom: 1.50rem !important;
+        }
 
         /* ----- PULSE GLOW ANIMATION (the "MRL above" effect) ----- */
         @keyframes pulseGlow {
@@ -198,161 +201,129 @@
             text-transform: uppercase; color: rgba(255,255,255,0.35);
         }
 
-
-        /* ── Closing quotes ── */
+        /* ── Scrolling Quotes Layer ── */
         #quote-layer {
             position: absolute; inset: 0; z-index: 20;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8vh; /* Spacing between the 3 rows */
+            overflow: hidden;
         }
-        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; }
+        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; z-index: -1; }
        
-        .quote-item {
-            position: absolute;
+        /* Wrappers handle the fade-in and slide-up independently of the scrolling */
+        .marquee-wrapper {
             opacity: 0;
-            transition: opacity 1.5s ease, transform 1.5s ease;
+            transform: translateY(30px);
+            transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
         }
-        .quote-item blockquote {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
-            font-weight: 600;
-            line-height: 1.4;
-            color: #fff;
-            margin-bottom: 0.5rem;
+        .marquee-wrapper.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .hl {
-            background: #ffff00;
-            color: #003300;
-            padding: 0.02em 0.2em;
+        /* The actual scrolling rows */
+        .marquee-row {
+            display: flex;
+            width: max-content;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 6vw;
+            padding-right: 6vw; /* Must match gap for seamless loop */
+        }
+
+        .quote-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            pointer-events: auto; /* Allows hover effects on the highlights */
+        }
+
+        .quote-item blockquote {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.1rem, 2.2vw, 2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        /* --- REFINED HIGHLIGHTER LOGIC --- */
+        .quote-item blockquote strong {
+            font-family: 'Playfair Display', Georgia, serif;
             font-weight: 700;
+            color: #000000; /* Dark text forces contrast over the highlight */
+            
+            /* Vertical Bleed Adjustments */
+            background-size: 100% 105%;
+            background-position: center; 
+            padding: 0.15rem 0.2rem; 
+            margin: -0.15rem -0.2rem; 
+            
+            background-repeat: no-repeat;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            transition: background-size 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline;
+        }
+
+        .quote-item blockquote strong:hover {
+            background-size: 100% 112%; /* Expands the bleed slightly on interaction */
+        }
+        
+        /* Variant 1: Standard Pressure */
+        .quote-item blockquote strong.hl-v1 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.78) 2.4%, rgba(var(--hl-gold), 0.53) 5.8%, rgba(var(--hl-gold), 0.73) 93%, rgba(var(--hl-gold), 0.58) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 3px 8px 10px 4px;
+        }
+        
+        /* Variant 2: Heavy Pressure / Ink pooling */
+        .quote-item blockquote strong.hl-v2 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.88) 2.4%, rgba(var(--hl-gold), 0.68) 12%, rgba(var(--hl-gold), 0.83) 88%, rgba(var(--hl-gold), 0.68) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 5px 2px 8px 6px;
+        }
+        
+        /* Variant 3: Light Pressure / Marker lifting */
+        .quote-item blockquote strong.hl-v3 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.63) 2.4%, rgba(var(--hl-gold), 0.33) 5.8%, rgba(var(--hl-gold), 0.63) 93%, rgba(var(--hl-gold), 0.43) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 2px 9px 5px 3px;
         }
 
         .quote-item cite {
-            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
-            font-weight: 300;
-            font-style: normal;
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.55rem, 0.8vw, 0.75rem);
+            font-weight: 400;
             letter-spacing: 0.16em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.42);
+            color: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
         }
 
-        /* quote positions */
-        .pos-1 {
-            top: 12%;
-            left: 6%;
-            width: 26%;
-            transform: translateY(-20px);
-            text-align: left;
-        }
+        /* Marquee Animations */
+        .scroll-left { animation: scroll-left 45s linear infinite; }
+        .scroll-right { animation: scroll-right 50s linear infinite; }
+        .scroll-left-fast { animation: scroll-left 38s linear infinite; }
 
-        .pos-2 {
-            top: 10%;
-            right: 6%;
-            width: 26%;
-            transform: translateY(-20px);
-            text-align: right;
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
-
-        .pos-3 {
-            top: 42%;
-            left: 4%;
-            width: 26%;
-            transform: translateX(-20px);
-            text-align: left;
-        }
-
-        .pos-4 {
-            top: 45%;
-            left: 50%;
-            width: 34%;
-            transform: translate(-50%, -20px);
-            text-align: center;
-        }
-
-        .pos-4 blockquote {
-            font-size: clamp(0.9rem, 1.6vw, 1.4rem);
-            margin-bottom: 0.8rem;
-        }
-
-        .pos-5 {
-            top: 42%;
-            right: 4%;
-            width: 26%;
-            transform: translateX(20px);
-            text-align: right;
-        }
-
-        .pos-6 {
-            bottom: 12%;
-            left: 10%;
-            width: 26%;
-            transform: translateY(20px);
-            text-align: left;
-        }
-
-        .pos-7 {
-            bottom: 10%;
-            right: 10%;
-            width: 26%;
-            transform: translateY(20px);
-            text-align: right;
-        }
-
-        .pos-1.active,
-        .pos-2.active,
-        .pos-6.active,
-        .pos-7.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .pos-3.active,
-        .pos-5.active {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .pos-4.active {
-            transform: translate(-50%, 0);
-            opacity: 1;
+        @keyframes scroll-right {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
         }
 
         @media (max-width: 768px) {
-            #quote-layer {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-            }
-            .quote-item {
-                position: relative;
-                top: auto !important;
-                left: auto !important;
-                right: auto !important;
-                bottom: auto !important;
-                transform: translateY(15px) !important;
-                width: 100% !important;
-                text-align: center !important;
-                margin-bottom: 0.8rem;
-            }
-            .quote-item.active {
-                transform: translateY(0) !important;
-                opacity: 1;
-            }
-
-            .quote-item blockquote {
-                font-size: clamp(0.7rem, 3vw, 1rem);
-                margin-bottom: 0.2rem;
-            }
-
-            .pos-4 blockquote {
-                font-size: clamp(0.8rem, 3.5vw, 1.1rem);
-            }
-
-            .quote-item cite {
-                font-size: 0.5rem;
-            }
+            #quote-layer { gap: 6vh; }
+            .marquee-content { gap: 10vw; padding-right: 10vw; }
+            .quote-item blockquote { font-size: clamp(1rem, 4vw, 1.4rem); }
+            .quote-item cite { font-size: 0.5rem; }
         }
 
 
@@ -394,33 +365,59 @@
     <!-- Closing quotes -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
-        <div class="quote-item pos-1">
-            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        
+        <!-- ROW 1: Left to Right -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row scroll-left">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+            </div>
         </div>
-        <div class="quote-item pos-2">
-            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+
+        <!-- ROW 2: Right to Left -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row scroll-right">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"His depth of knowledge of his subject matter is <strong class="hl-v3">astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"His depth of knowledge of his subject matter is <strong class="hl-v3">astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+            </div>
         </div>
-        <div class="quote-item pos-3">
-            <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-4">
-            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-5">
-            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-6">
-            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-7">
-            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+
+        <!-- ROW 3: Left to Right (Faster) -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row scroll-left-fast">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"You pressed them today to <strong class="hl-v1">think deeply & articulate their decisions.</strong>"</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"He holds <strong class="hl-v2">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael made <strong class="hl-v3">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"You pressed them today to <strong class="hl-v1">think deeply & articulate their decisions.</strong>"</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"He holds <strong class="hl-v2">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael made <strong class="hl-v3">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -537,14 +534,11 @@ function drawQuote(p) {
     var e = 1 - Math.pow(1 - p, 3);
     quoteBg.style.opacity = e.toFixed(3);
    
-    const quotes = document.querySelectorAll('.quote-item');
-    if (p > 0.05) quotes[0].classList.add('active');
-    if (p > 0.15) quotes[1].classList.add('active');
-    if (p > 0.25) quotes[2].classList.add('active');
-    if (p > 0.35) quotes[3].classList.add('active');
-    if (p > 0.45) quotes[4].classList.add('active');
-    if (p > 0.55) quotes[5].classList.add('active');
-    if (p > 0.65) quotes[6].classList.add('active');
+    const wrappers = document.querySelectorAll('.marquee-wrapper');
+    // Stagger the fade-in of the three rows
+    if (p > 0.1) wrappers[0].classList.add('active');
+    if (p > 0.3) wrappers[1].classList.add('active');
+    if (p > 0.5) wrappers[2].classList.add('active');
 }
 
 function finalise() {
