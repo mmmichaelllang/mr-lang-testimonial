@@ -56,11 +56,11 @@
             pointer-events: none;
         }
 
-        /* TEXT LOGO: 𐊎ꝛꛚ with yellow pulsing glow (non-bold) */
+        /* Update .s-logo-img to ensure non-bold and proper bottom margin for spacing */
 .s-logo-img {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: clamp(2.2rem, 8vw, 4.5rem);
-    font-weight: 400;      /* ← Changed from 700 to 400 (non-bold) */
+    font-weight: 400;      /* Non-bold */
     font-style: normal;
     color: #FEF612;
     text-align: center;
@@ -68,6 +68,7 @@
     filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
     animation: pulseGlow 2.5s ease-in-out infinite both;
     line-height: 1;
+    margin-bottom: 0.25rem;  /* ADD THIS — creates single line space */
 }
 
         /* ----- PULSE GLOW ANIMATION (the "MRL above" effect) ----- */
