@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonial — Mr. Lang</title>
+    <title>𐊎ꝛꛚ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Warm up connection to portfolio while video plays -->
@@ -152,41 +152,57 @@
         }
         .quote-item blockquote {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
             font-weight: 600; line-height: 1.4;
-            color: #fff; margin-bottom: 0.8rem;
+            color: #fff; margin-bottom: 0.5rem;
         }
         .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
         .quote-item cite {
-            font-size: clamp(0.55rem, 0.9vw, 0.75rem);
+            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
             font-weight: 300; font-style: normal;
             letter-spacing: 0.16em; text-transform: uppercase;
             color: rgba(255,255,255,0.42);
         }
 
 
-        .quote-top { top: 10%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 85%; max-width: 800px; }
-        .quote-bottom { bottom: 10%; left: 50%; transform: translate(-50%, 40px); text-align: center; width: 85%; max-width: 800px; }
-        .quote-left { top: 50%; left: 5%; transform: translate(-40px, -50%); text-align: left; width: 40%; max-width: 450px; }
-        .quote-right { top: 50%; right: 5%; transform: translate(40px, -50%); text-align: right; width: 40%; max-width: 450px; }
+        .pos-1 { top: 12%; left: 6%; width: 26%; transform: translateY(-20px); text-align: left; }
+        .pos-2 { top: 10%; right: 6%; width: 26%; transform: translateY(-20px); text-align: right; }
+        .pos-3 { top: 42%; left: 4%; width: 26%; transform: translateX(-20px); text-align: left; }
+        .pos-4 { top: 45%; left: 50%; width: 34%; transform: translate(-50%, -20px); text-align: center; }
+        .pos-4 blockquote { font-size: clamp(0.9rem, 1.6vw, 1.4rem); margin-bottom: 0.8rem; }
+        .pos-5 { top: 42%; right: 4%; width: 26%; transform: translateX(20px); text-align: right; }
+        .pos-6 { bottom: 12%; left: 10%; width: 26%; transform: translateY(20px); text-align: left; }
+        .pos-7 { bottom: 10%; right: 10%; width: 26%; transform: translateY(20px); text-align: right; }
 
 
-        .quote-top.active { transform: translate(-50%, 0); opacity: 1; }
-        .quote-bottom.active { transform: translate(-50%, 0); opacity: 1; }
-        .quote-left.active { transform: translate(0, -50%); opacity: 1; }
-        .quote-right.active { transform: translate(0, -50%); opacity: 1; }
+        .pos-1.active, .pos-2.active, .pos-6.active, .pos-7.active { transform: translateY(0); opacity: 1; }
+        .pos-3.active, .pos-5.active { transform: translateX(0); opacity: 1; }
+        .pos-4.active { transform: translate(-50%, 0); opacity: 1; }
 
 
         @media (max-width: 768px) {
-            .quote-top { top: 5%; }
-            .quote-bottom { bottom: 5%; }
-            .quote-left { top: 35%; left: 50%; transform: translate(-50%, -40px); text-align: center; width: 90%; max-width: none; }
-            .quote-right { top: 65%; left: 50%; right: auto; transform: translate(-50%, 40px); text-align: center; width: 90%; max-width: none; }
-           
-            .quote-left.active { transform: translate(-50%, 0); }
-            .quote-right.active { transform: translate(-50%, 0); }
-           
-            .quote-item blockquote { font-size: clamp(0.85rem, 3.5vw, 1.2rem); }
+            #quote-layer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 1rem;
+            }
+            .quote-item {
+                position: relative;
+                top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+                transform: translateY(15px) !important;
+                width: 100% !important;
+                text-align: center !important;
+                margin-bottom: 0.8rem;
+            }
+            .quote-item.active {
+                transform: translateY(0) !important;
+                opacity: 1;
+            }
+            .quote-item blockquote { font-size: clamp(0.7rem, 3vw, 1rem); margin-bottom: 0.2rem; }
+            .pos-4 blockquote { font-size: clamp(0.8rem, 3.5vw, 1.1rem); }
+            .quote-item cite { font-size: 0.5rem; }
         }
 
 
@@ -225,21 +241,33 @@
     <!-- Closing quotes -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
-        <div class="quote-item quote-top">
-            <blockquote>"I cannot speak highly enough of Michael Lang. He is a natural teacher... <span class="hl">Frankly, he has it all!</span>"</blockquote>
+        <div class="quote-item pos-1">
+            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
             <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
-        <div class="quote-item quote-left">
-            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> It's truly been a pleasure getting to work with Michael. He is exactly what our students need."</blockquote>
+        <div class="quote-item pos-2">
+            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
             <cite>Christopher Burt &middot; Clinical Supervisor</cite>
         </div>
-        <div class="quote-item quote-right">
+        <div class="quote-item pos-3">
             <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
             <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
-        <div class="quote-item quote-bottom">
-            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span> level questions... is <span class="hl">just off the chart.</span>"</blockquote>
+        <div class="quote-item pos-4">
+            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
             <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item pos-5">
+            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
+            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+        </div>
+        <div class="quote-item pos-6">
+            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        </div>
+        <div class="quote-item pos-7">
+            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
+            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
         </div>
     </div>
 
