@@ -42,7 +42,7 @@
         body.dissolved #stage { opacity: 0; pointer-events: none; }
 
         /* ── Wrapper ── */
-        #stage { position: absolute; inset: 0; transition: opacity 2s ease; }
+        #stage { position: absolute; inset: 0; transition: opacity 3s ease; }
 
         /* ── Splash: MR. L. ── */
         #splash {
@@ -71,7 +71,7 @@
             letter-spacing: -0.05em;
             filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
             animation: pulseGlow 2.5s ease-in-out infinite both;
-            line-height: 3 !important;
+            line-height: 2 !important;
             margin-bottom: 1.50rem !important;
         }
 
@@ -140,7 +140,7 @@
         /* "TAP TO ENTER" text — matches glow and color from MRL logo */
         .s-cta {
             font-size: clamp(0.65rem, 0.9vw, 0.85rem);
-            font-weight: 400 !important;
+            font-weight: 300 !important;
             letter-spacing: 0.45em;
             text-transform: uppercase;
             color: #FEF612;
@@ -193,11 +193,11 @@
         .lt-rule { width: 36px; height: 1px; background: rgba(255,255,0,0.3); margin: 0 auto 0.8rem; }
         .lt-name {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1rem, 2.4vw, 1.55rem);
+            font-size: clamp(1.58rem, 2.4vw, 1.55rem);
             color: rgba(255,255,255,0.8); margin-bottom: 0.2rem;
         }
         .lt-role {
-            font-size: clamp(0.58rem, 0.95vw, 0.75rem);
+            font-size: clamp(1rem, 0.95vw, 0.75rem);
             font-weight: 300; letter-spacing: 0.22em;
             text-transform: uppercase; color: rgba(255,255,255,0.35);
         }
@@ -240,9 +240,9 @@
         .move-left { transform: translateX(0); }
 
         /* Animations ONLY apply when the wrapper is active */
-        .marquee-wrapper.active .move-right { animation: scrollRight 90s linear infinite; }
-        .marquee-wrapper.active .move-left { animation: scrollLeft 100s linear infinite; }
-        .marquee-wrapper.active .move-right-fast { animation: scrollRight 80s linear infinite; }
+        .marquee-wrapper.active .move-right { animation: scrollRight 80s linear infinite; }
+        .marquee-wrapper.active .move-left { animation: scrollLeft 90s linear infinite; }
+        .marquee-wrapper.active .move-right-fast { animation: scrollRight 70s linear infinite; }
 
         .marquee-content {
             display: flex;
