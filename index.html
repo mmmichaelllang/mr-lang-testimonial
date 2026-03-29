@@ -3,16 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonial — Mr. Lang</title>
+    <title>𐊎ꝛꛚ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Warm up connection to portfolio while video plays -->
-    <link rel="preconnect" href="https://main.mrla.ng">
-    <link rel="dns-prefetch" href="https://main.mrla.ng">
-    <link rel="prefetch" href="https://main.mrla.ng">
+    <link rel="preconnect" href="https://hire.mrla.ng">
+    <link rel="dns-prefetch" href="https://hire.mrla.ng">
+    <link rel="prefetch" href="https://hire.mrla.ng">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --hl-gold: 255, 215, 0; 
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
         html {
             width: 100%; height: 100%;
             background: #003300;
@@ -24,11 +37,12 @@
             font-family: 'Inter', system-ui, sans-serif;
             transition: background 2s ease;
         }
-        body.dissolved { background: #003300; }
+        /* Fade to black at the very end before redirect */
+        body.dissolved { background: #000000; }
         body.dissolved #stage { opacity: 0; pointer-events: none; }
 
         /* ── Wrapper ── */
-        #stage { position: absolute; inset: 0; transition: opacity 2s ease; }
+        #stage { position: absolute; inset: 0; transition: opacity 3s ease; }
 
         /* ── Splash: MR. L. ── */
         #splash {
@@ -38,17 +52,39 @@
             align-items: center; justify-content: center;
             cursor: pointer;
             transition: opacity 3.5s cubic-bezier(0.4, 0, 0.2, 1);
-            -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
-            user-select: none;
+            backdrop-filter: blur(0px);
         }
-        #splash.fading { opacity: 0; pointer-events: none; }
+
+        #splash.fading {
+            opacity: 0;
+            pointer-events: none;
+        }
 
         .s-logo-img {
-            max-width: clamp(160px, 30vw, 340px);
-            max-height: clamp(100px, 20vh, 220px);
-            object-fit: contain;
-            margin-bottom: clamp(1.2rem, 3vh, 2.5rem);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
+            font-weight: 200 !important;      /* Non-bold */
+            font-style: normal;
+            color: #FEF612;
+            text-align: center;
+            letter-spacing: -0.05em;
+            filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
+            animation: pulseGlow 2.5s ease-in-out infinite both;
+            line-height: 2 !important;
+            margin-bottom: 1.50rem !important;
+        }
+
+        /* ----- PULSE GLOW ANIMATION (the "MRL above" effect) ----- */
+        @keyframes pulseGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px #FEF612) brightness(1.1);
+                text-shadow: 0 0 4px #FEF612;
+            }
+            50% {
+                filter: drop-shadow(0 0 20px #FEF612) brightness(1.35);
+                text-shadow: 0 0 12px #FEF612;
+            }
         }
 
         .s-welcome {
@@ -69,29 +105,58 @@
             margin-bottom: clamp(2rem, 7vh, 5rem);
         }
 
+        /* ========== ✦ ENHANCED TAP SECTION: doorway + "TAP TO ENTER" ✦ ========== */
+        /* container that groups the door symbol and text — both get the same pulsing glow as MRL */
+        .enter-glow-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            /* inherit the pulseGlow animation to make both elements glow together */
+            animation: pulseGlow 2.5s ease-in-out infinite both;
+            filter: drop-shadow(0 0 6px #FEF612);
+            transition: filter 0.2s ease;
+        }
+
+        /* doorway icon wrapper — bright yellow, animated glow via parent */
         .s-ring {
-            width: clamp(54px, 7.5vw, 68px);
-            height: clamp(54px, 7.5vw, 68px);
-            border: 1.5px solid rgba(255,255,255,0.13);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 1.1rem;
-            transition: border-color 0.7s, box-shadow 0.7s;
-            animation: s-breathe 4s ease-in-out infinite;
-        }
-        .s-ring svg { color: rgba(255,255,255,0.32); transition: color 0.6s; }
-        #splash:hover .s-ring { border-color: rgba(255,255,0,0.45); box-shadow: 0 0 60px rgba(255,255,0,0.06); }
-        #splash:hover .s-ring svg { color: rgba(255,255,0,0.8); }
-
-        @keyframes s-breathe {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50%       { transform: scale(1.045); opacity: 1; }
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #FEF612;
+            transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
+        .s-ring svg {
+            width: 32px;
+            height: 32px;
+            stroke: #FEF612;
+            stroke-width: 1.6;
+            filter: drop-shadow(0 0 4px #FEF612);
+            transition: all 0.2s;
+        }
+
+        /* "TAP TO ENTER" text — matches glow and color from MRL logo */
         .s-cta {
-            font-size: clamp(0.5rem, 0.7vw, 0.58rem);
-            font-weight: 600; letter-spacing: 0.4em;
-            text-transform: uppercase; color: rgba(255,255,255,0.16);
+            font-size: clamp(0.65rem, 0.9vw, 0.85rem);
+            font-weight: 300 !important;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            color: #FEF612;
+            background: transparent;
+            text-shadow: 0 0 2px #FEF612;
+            transition: letter-spacing 0.3s ease;
+        }
+
+        /* subtle hover / tap lift effect — keeps glowing but adds slight scale */
+        #splash:hover .enter-glow-group {
+            transform: scale(1.01);
+            filter: drop-shadow(0 0 12px #FEF612) brightness(1.0);
+        }
+
+        #splash:active .enter-glow-group {
+            transform: scale(0.98);
         }
 
         .s-in {
@@ -128,101 +193,171 @@
         .lt-rule { width: 36px; height: 1px; background: rgba(255,255,0,0.3); margin: 0 auto 0.8rem; }
         .lt-name {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1rem, 2.4vw, 1.55rem);
+            font-size: clamp(1.58rem, 2.4vw, 1.55rem);
             color: rgba(255,255,255,0.8); margin-bottom: 0.2rem;
         }
         .lt-role {
-            font-size: clamp(0.58rem, 0.95vw, 0.75rem);
+            font-size: clamp(1rem, 0.95vw, 0.75rem);
             font-weight: 300; letter-spacing: 0.22em;
             text-transform: uppercase; color: rgba(255,255,255,0.35);
         }
 
-        /* ── Closing quotes ── */
+        /* ── Scrolling Quotes Layer ── */
         #quote-layer {
-            position: absolute; inset: 0; z-index: 20;
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 20;
             pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 8vh; /* Spacing between the 3 rows */
+            overflow: hidden;
         }
-        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; }
-        
-        .quote-item {
-            position: absolute;
+        #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; z-index: -1; }
+       
+        /* Wrappers handle the fade-in and slide-up independently of the scrolling */
+        .marquee-wrapper {
             opacity: 0;
-            transition: opacity 1.5s ease, transform 1.5s ease;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            width: 100%;
         }
+        .marquee-wrapper.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 
+           CRITICAL FIX: Set base transforms so there's no jump when animation starts.
+        */
+        .marquee-row {
+            display: flex;
+            width: max-content;
+            will-change: transform;
+        }
+        .move-right, .move-right-fast { transform: translateX(-50%); }
+        .move-left { transform: translateX(0); }
+
+        /* Animations ONLY apply when the wrapper is active */
+        .marquee-wrapper.active .move-right { animation: scrollRight 80s linear infinite; }
+        .marquee-wrapper.active .move-left { animation: scrollLeft 90s linear infinite; }
+        .marquee-wrapper.active .move-right-fast { animation: scrollRight 70s linear infinite; }
+
+        .marquee-content {
+            display: flex;
+            gap: 4vw;
+            padding-right: 4vw; 
+            flex-shrink: 0; /* Prevents text crushing */
+        }
+
+        .quote-item {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.5rem;
+            pointer-events: auto; 
+            flex-shrink: 0; /* CRITICAL FIX */
+        }
+
         .quote-item blockquote {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(0.75rem, 1.2vw, 1.1rem);
-            font-weight: 600; line-height: 1.4;
-            color: #fff; margin-bottom: 0.5rem;
+            font-size: clamp(1.1rem, 2.2vw, 2rem);
+            font-weight: 600;
+            line-height: 1.2;
+            color: #fff;
+            white-space: nowrap;
         }
-        .hl { background: #ffff00; color: #003300; padding: 0.02em 0.2em; font-weight: 700; }
+
+        /* --- REFINED HIGHLIGHTER LOGIC --- */
+        .quote-item blockquote strong {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            color: #000000; /* Dark text forces contrast over the highlight */
+            
+            /* Vertical Bleed Adjustments */
+            background-size: 100% 105%;
+            background-position: center; 
+            padding: 0.15rem 0.2rem; 
+            margin: -0.15rem -0.2rem; 
+            background-repeat: no-repeat;
+            -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+            transition: background-size 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+            display: inline;
+        }
+
+        .quote-item blockquote strong:hover {
+            background-size: 100% 112%; /* Expands the bleed slightly on interaction */
+        }
+        
+        /* Variant 1: Standard Pressure */
+        .quote-item blockquote strong.hl-v1 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.78) 2.4%, rgba(var(--hl-gold), 0.53) 5.8%, rgba(var(--hl-gold), 0.73) 93%, rgba(var(--hl-gold), 0.58) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 3px 8px 10px 4px;
+        }
+        
+        /* Variant 2: Heavy Pressure / Ink pooling */
+        .quote-item blockquote strong.hl-v2 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.88) 2.4%, rgba(var(--hl-gold), 0.68) 12%, rgba(var(--hl-gold), 0.83) 88%, rgba(var(--hl-gold), 0.68) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 5px 2px 8px 6px;
+        }
+        
+        /* Variant 3: Light Pressure / Marker lifting */
+        .quote-item blockquote strong.hl-v3 {
+            background-image: linear-gradient(104deg, rgba(var(--hl-gold), 0) 0.9%, rgba(var(--hl-gold), 0.63) 2.4%, rgba(var(--hl-gold), 0.33) 5.8%, rgba(var(--hl-gold), 0.63) 93%, rgba(var(--hl-gold), 0.43) 96%, rgba(var(--hl-gold), 0) 98%);
+            border-radius: 2px 9px 5px 3px;
+        }
+
         .quote-item cite {
-            font-size: clamp(0.5rem, 0.75vw, 0.65rem);
-            font-weight: 300; font-style: normal;
-            letter-spacing: 0.16em; text-transform: uppercase;
-            color: rgba(255,255,255,0.42);
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.55rem, 0.8vw, 0.75rem);
+            font-weight: 400;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            white-space: nowrap;
         }
 
-        .pos-1 { top: 12%; left: 6%; width: 26%; transform: translateY(-20px); text-align: left; }
-        .pos-2 { top: 10%; right: 6%; width: 26%; transform: translateY(-20px); text-align: right; }
-        .pos-3 { top: 42%; left: 4%; width: 26%; transform: translateX(-20px); text-align: left; }
-        .pos-4 { top: 45%; left: 50%; width: 34%; transform: translate(-50%, -20px); text-align: center; }
-        .pos-4 blockquote { font-size: clamp(0.9rem, 1.6vw, 1.4rem); margin-bottom: 0.8rem; }
-        .pos-5 { top: 42%; right: 4%; width: 26%; transform: translateX(20px); text-align: right; }
-        .pos-6 { bottom: 12%; left: 10%; width: 26%; transform: translateY(20px); text-align: left; }
-        .pos-7 { bottom: 10%; right: 10%; width: 26%; transform: translateY(20px); text-align: right; }
-
-        .pos-1.active, .pos-2.active, .pos-6.active, .pos-7.active { transform: translateY(0); opacity: 1; }
-        .pos-3.active, .pos-5.active { transform: translateX(0); opacity: 1; }
-        .pos-4.active { transform: translate(-50%, 0); opacity: 1; }
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
 
         @media (max-width: 768px) {
-            #quote-layer {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 1rem;
-            }
-            .quote-item {
-                position: relative;
-                top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
-                transform: translateY(15px) !important;
-                width: 100% !important;
-                text-align: center !important;
-                margin-bottom: 0.8rem;
-            }
-            .quote-item.active {
-                transform: translateY(0) !important;
-                opacity: 1;
-            }
-            .quote-item blockquote { font-size: clamp(0.7rem, 3vw, 1rem); margin-bottom: 0.2rem; }
-            .pos-4 blockquote { font-size: clamp(0.8rem, 3.5vw, 1.1rem); }
+            #quote-layer { gap: 6vh; }
+            .marquee-content { gap: 8vw; padding-right: 8vw; }
+            .quote-item blockquote { font-size: clamp(1rem, 4vw, 1.4rem); }
             .quote-item cite { font-size: 0.5rem; }
         }
-
     </style>
 </head>
 <body>
 <div id="stage">
 
-    <!-- Splash: MR. L. -->
+    <!-- SPLASH -->
     <div id="splash">
-        <img class="s-in s-logo-img" src="https://i.imgur.com/nbJAxvM.png" alt="Mr. Lang" onerror="this.src='https://i.imgur.com/nbJAxvM.jpg'">
-        <div class="s-in s-welcome">welcome, come on in and find your seat, and leave your phones and backpacks on the wall</div>
+        <div class="s-in s-logo-img">𐊎ⲅꛚ</div>
+        <div class="s-in s-welcome">welcome, come in and find your seat, and you can<br> leave your phones and backpacks against the wall</div>
         <div class="s-in s-divider"></div>
-        <div class="s-in s-ring">
-            <!-- threshold / enter symbol: a doorway arch -->
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15"/>
-                <line x1="1" y1="21" x2="23" y2="21"/>
-                <path d="M10 21v-5a2 2 0 0 1 4 0v5"/>
-            </svg>
+
+        <div class="enter-glow-group s-in">
+            <div class="s-ring">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 21V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v15" />
+                    <line x1="1" y1="21" x2="23" y2="21" />
+                    <path d="M10 21v-5a2 2 0 0 1 4 0v5" />
+                </svg>
+            </div>
+            <div class="s-cta">Tap to enter</div>
         </div>
-        <div class="s-in s-cta">Tap to enter</div>
     </div>
 
-    <!-- Video -->
+    <!-- Video layer (YouTube iframe) -->
     <div id="video-layer"></div>
 
     <!-- Speaker lower-third -->
@@ -232,40 +367,70 @@
         <div class="lt-role">Clinical Supervisor</div>
     </div>
 
-    <!-- Closing quotes -->
+    <!-- Scrolling Quotes Layer -->
     <div id="quote-layer">
         <div id="quote-bg"></div>
-        <div class="quote-item pos-1">
-            <blockquote>"I cannot speak highly enough of Michael Lang... <span class="hl">Frankly, he has it all!</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+        
+        <!-- ROW 1: Left to Right (Features your #1 and #3 favorites) -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row move-right">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"There is a <strong class="hl-v2">very productive hum & tone</strong> throughout the class."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"I cannot speak highly enough of Michael Lang... <strong class="hl-v1">Frankly, he has it all!</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"His <strong class="hl-v3">depth of knowledge of his subject matter is astounding.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"Michael is a <strong class="hl-v3">natural leader</strong> and a naturally kind person."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v1">voracious reader and writer.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"There is a <strong class="hl-v2">very productive hum & tone</strong> throughout the class."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                </div>
+            </div>
         </div>
-        <div class="quote-item pos-2">
-            <blockquote>"Michael is <span class="hl">ready for his own classroom.</span> He is exactly what our students need."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
+
+        <!-- ROW 2: Right to Left (Features your #2 favorite) -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row move-left">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"Michael is <strong class="hl-v2">ready for his own classroom.</strong> He is exactly what our students need."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Your ability to <strong class="hl-v2">facilitate critical thinking</strong>... is just off the chart."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"He <strong class="hl-v1">handles management challenges like a pro</strong>."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is a <strong class="hl-v2">master of technology</strong> and data collection."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is <strong class="hl-v1">light on his feet</strong>, able to adjust to changing circumstances."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+            </div>
         </div>
-        <div class="quote-item pos-3">
-            <blockquote>"Michael's <span class="hl">depth of knowledge</span> of his subject matter is <span class="hl">astounding.</span>"</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-4">
-            <blockquote>"I'm feeling really confident about this... your ability to <span class="hl">facilitate critical thinking</span>... is <span class="hl">just off the chart.</span>"</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-5">
-            <blockquote>"He is kind, patient, respectful and holds <span class="hl">high expectations</span> for both himself and his students."</blockquote>
-            <cite>Christopher Burt &middot; Clinical Supervisor</cite>
-        </div>
-        <div class="quote-item pos-6">
-            <blockquote>"He is a <span class="hl">master of technology</span> and data collection."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
-        </div>
-        <div class="quote-item pos-7">
-            <blockquote>"Michael is a <span class="hl">natural leader</span> and a naturally kind person."</blockquote>
-            <cite>Dean Ferguson &middot; Mentor Teacher</cite>
+
+        <!-- ROW 3: Left to Right (Features your #5 favorite) -->
+        <div class="marquee-wrapper">
+            <div class="marquee-row move-right-fast">
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael made <strong class="hl-v2">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is already a <strong class="hl-v3">highly effective teacher</strong> and has a long, wonderful career ahead of him!"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He has a <strong class="hl-v2">deep appreciation for the human intellect.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+                <div class="marquee-content">
+                    <div class="quote-item"><blockquote>"<strong class="hl-v3">Head and shoulders above other interns</strong> I have worked with."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He holds <strong class="hl-v1">high expectations</strong> for both himself and his students."</blockquote><cite>Christopher Burt &middot; Clinical Supervisor</cite></div>
+                    <div class="quote-item"><blockquote>"Michael made <strong class="hl-v2">real-world application of ideas</strong> the centerpiece of the classroom."</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He is already a <strong class="hl-v3">highly effective teacher</strong> and has a long, wonderful career ahead of him!"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                    <div class="quote-item"><blockquote>"He has a <strong class="hl-v2">deep appreciation for the human intellect.</strong>"</blockquote><cite>Dean Ferguson &middot; Mentor Teacher</cite></div>
+                </div>
+            </div>
         </div>
     </div>
-
-
 </div>
 
 <script>
@@ -394,15 +559,12 @@ function stopPolling() { if (poller) { clearInterval(poller); poller = null; } }
 function drawQuote(p) {
     var e = 1 - Math.pow(1 - p, 3);
     quoteBg.style.opacity = e.toFixed(3);
-    
-    const quotes = document.querySelectorAll('.quote-item');
-    if (p > 0.05) quotes[0].classList.add('active');
-    if (p > 0.15) quotes[1].classList.add('active');
-    if (p > 0.25) quotes[2].classList.add('active');
-    if (p > 0.35) quotes[3].classList.add('active');
-    if (p > 0.45) quotes[4].classList.add('active');
-    if (p > 0.55) quotes[5].classList.add('active');
-    if (p > 0.65) quotes[6].classList.add('active');
+   
+    const wrappers = document.querySelectorAll('.marquee-wrapper');
+    // The .active class now triggers BOTH the fade-in AND the start of the scrolling animation
+    if (p > 0.1) wrappers[0].classList.add('active');
+    if (p > 0.3) wrappers[1].classList.add('active');
+    if (p > 0.5) wrappers[2].classList.add('active');
 }
 
 function finalise() {
@@ -410,14 +572,19 @@ function finalise() {
     drawQuote(1);
     setTimeout(function() { videoLayer.style.display = 'none'; }, 600);
 
+
     /* Hold the quotes briefly, then dissolve and redirect to portfolio */
     setTimeout(function() {
         document.body.classList.add('dissolved');
     }, 8000);
     setTimeout(function() {
-        window.location.replace('https://main.mrla.ng');
+        window.location.replace('https://hire.mrla.ng');
     }, 10000);
 }
 </script>
+
+<!-- The "Hidden Iframe" Trick: Forces the browser to download all Google Sites JS, fonts, and images in the background while the video plays -->
+<iframe src="https://hire.mrla.ng" style="display:none; width:0; height:0; visibility:hidden;" tabindex="-1"></iframe>
+
 </body>
 </html>
