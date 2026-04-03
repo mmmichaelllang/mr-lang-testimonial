@@ -210,8 +210,9 @@
             pointer-events: none;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            gap: 5.5vh; /* Spacing between the 5 rows */
+            justify-content: flex-start;
+            padding-top: 8vh;
+            gap: 4vh; /* Spacing between the 5 rows */
             overflow: hidden;
         }
         #quote-bg { position: absolute; inset: 0; background: #003300; opacity: 0; z-index: -1; }
@@ -528,7 +529,6 @@ window.onYouTubeIframeAPIReady = function() {
     var vars = {
         autoplay:       1,
         mute:           1,
-        start:          START_AT,
         playsinline:    1,
         controls:       0,
         rel:            0,
